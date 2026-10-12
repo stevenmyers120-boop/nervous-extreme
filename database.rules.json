@@ -104,6 +104,192 @@
           ".validate": false
         }
       }
+    },
+    "distanceRooms": {
+      "$room": {
+        ".read": "auth != null && (root.child('distanceRooms').child($room).child('hostUid').val() === auth.uid || root.child('distanceRooms').child($room).child('guestUid').val() === auth.uid) && root.child('distanceRooms').child($room).child('expiresAt').val() > now && root.child('distanceRooms').child($room).child('closed').val() === false",
+        ".write": "auth != null && $room.matches(/^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{6}$/) && !data.exists() && !newData.child('game').exists() && !newData.child('actions').exists() && !newData.child('presence').exists() && !newData.child('ready').exists() && newData.child('hostUid').val() === auth.uid && newData.child('guestUid').val() === '' && newData.child('createdAt').val() === now && newData.child('expiresAt').val() > now + 60000 && newData.child('expiresAt').val() <= now + 14400000 && newData.child('closed').val() === false",
+        ".validate": "newData.hasChildren(['hostUid','guestUid','createdAt','expiresAt','closed'])",
+        "hostUid": {
+          ".validate": "newData.isString() && (data.exists() ? newData.val() === data.val() : newData.val() === auth.uid)"
+        },
+        "guestUid": {
+          ".write": "auth != null && root.child('distanceRooms').child($room).child('expiresAt').val() > now && root.child('distanceRooms').child($room).child('closed').val() === false && root.child('distanceRooms').child($room).child('hostUid').val() !== auth.uid && (!root.child('distanceRooms').child($room).child('game').exists() || root.child('distanceRooms').child($room).child('game').child('state').child('phase').val() === 'setup') && ((newData.val() === auth.uid && (data.val() === '' || data.val() === auth.uid)) || (data.val() === auth.uid && newData.val() === ''))",
+          ".validate": "newData.isString() && newData.val().length <= 128"
+        },
+        "createdAt": {
+          ".validate": "newData.isNumber() && (data.exists() ? newData.val() === data.val() : newData.val() === now)"
+        },
+        "expiresAt": {
+          ".validate": "newData.isNumber() && (!data.exists() || newData.val() === data.val())"
+        },
+        "closed": {
+          ".read": "auth != null && (root.child('distanceRooms').child($room).child('hostUid').val() === auth.uid || root.child('distanceRooms').child($room).child('guestUid').val() === auth.uid) && root.child('distanceRooms').child($room).child('expiresAt').val() > now",
+          ".write": "auth != null && (root.child('distanceRooms').child($room).child('hostUid').val() === auth.uid || root.child('distanceRooms').child($room).child('guestUid').val() === auth.uid) && root.child('distanceRooms').child($room).child('expiresAt').val() > now && root.child('distanceRooms').child($room).child('closed').val() === false && newData.val() === true",
+          ".validate": "newData.isBoolean()"
+        },
+        "game": {
+          ".write": "auth != null && root.child('distanceRooms').child($room).child('hostUid').val() === auth.uid && root.child('distanceRooms').child($room).child('expiresAt').val() > now && root.child('distanceRooms').child($room).child('closed').val() === false && newData.exists()",
+          ".validate": "newData.hasChildren(['state','revision','updatedAt'])",
+          "revision": {
+            ".validate": "newData.isNumber() && newData.val() === (data.exists() ? data.val() + 1 : 1)"
+          },
+          "updatedAt": {
+            ".validate": "newData.val() === now"
+          },
+          "state": {
+            ".validate": "newData.hasChildren(['phase','names','genders','target','match','round','turn','level','wins','task','mode','custom','responseType','answer','submitted','revealed','surprise','classics','nextSurprise','timerSeconds','timerUntil','status']) && newData.child('turn').val() === (newData.child('round').val() - 1) % 2",
+            "phase": {
+              ".validate": "newData.val() === \"setup\" || newData.val() === \"playing\" || newData.val() === \"winner\" || newData.val() === \"finished\""
+            },
+            "names": {
+              ".validate": "newData.hasChildren(['0','1'])",
+              "$i": {
+                ".validate": "($i === '0' || $i === '1') && (newData.isString() && newData.val().length > 0 && newData.val().length <= 30)"
+              }
+            },
+            "genders": {
+              ".validate": "newData.hasChildren(['0','1'])",
+              "$i": {
+                ".validate": "($i === '0' || $i === '1') && (newData.val() === 'male' || newData.val() === 'female')"
+              }
+            },
+            "wins": {
+              ".validate": "newData.hasChildren(['0','1'])",
+              "$i": {
+                ".validate": "($i === '0' || $i === '1') && (newData.isNumber() && newData.val() >= 0 && newData.val() <= 22 && newData.val() % 1 === 0)"
+              }
+            },
+            "target": {
+              ".validate": "newData.val() === 10 || newData.val() === 15 || newData.val() === 20"
+            },
+            "match": {
+              ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 3 && newData.val() % 1 === 0"
+            },
+            "round": {
+              ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 10000 && newData.val() % 1 === 0"
+            },
+            "turn": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1 && newData.val() % 1 === 0"
+            },
+            "level": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 4 && newData.val() % 1 === 0"
+            },
+            "task": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 23 && newData.val() % 1 === 0"
+            },
+            "mode": {
+              ".validate": "newData.val() === \"classic\" || newData.val() === \"truth\" || newData.val() === \"dare\""
+            },
+            "custom": {
+              ".validate": "newData.isString() && newData.val().length <= 1000"
+            },
+            "responseType": {
+              ".validate": "newData.val() === \"text\" || newData.val() === \"photo\" || newData.val() === \"video\""
+            },
+            "answer": {
+              ".validate": "newData.isString() && newData.val().length <= 2000"
+            },
+            "submitted": {
+              ".validate": "newData.isBoolean()"
+            },
+            "revealed": {
+              ".validate": "newData.isBoolean()"
+            },
+            "surprise": {
+              ".validate": "newData.val() === \"random\" || newData.val() === \"truth\" || newData.val() === \"dare\" || newData.val() === \"off\""
+            },
+            "classics": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 4 && newData.val() % 1 === 0"
+            },
+            "nextSurprise": {
+              ".validate": "newData.val() === 3 || newData.val() === 4"
+            },
+            "timerSeconds": {
+              ".validate": "newData.val() === 0 || newData.val() === 15 || newData.val() === 30"
+            },
+            "timerUntil": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= now + 31000"
+            },
+            "status": {
+              ".validate": "newData.isString() && newData.val().length <= 200"
+            },
+            "used": {
+              "$i": {
+                ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 23 && newData.val() % 1 === 0"
+              }
+            },
+            "results": {
+              "$i": {
+                ".validate": "($i === '0' || $i === '1' || $i === '2') && newData.hasChildren(['match','winner','scores'])",
+                "match": {
+                  ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 3 && newData.val() % 1 === 0"
+                },
+                "winner": {
+                  ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1 && newData.val() % 1 === 0"
+                },
+                "scores": {
+                  ".validate": "newData.hasChildren(['0','1'])",
+                  "$i": {
+                    ".validate": "($i === '0' || $i === '1') && (newData.isNumber() && newData.val() >= 0 && newData.val() <= 22)"
+                  }
+                },
+                "$other": {
+                  ".validate": false
+                }
+              }
+            },
+            "$other": {
+              ".validate": false
+            }
+          },
+          "$other": {
+            ".validate": false
+          }
+        },
+        "actions": {
+          "$action": {
+            ".write": "(auth != null && (root.child('distanceRooms').child($room).child('hostUid').val() === auth.uid || root.child('distanceRooms').child($room).child('guestUid').val() === auth.uid) && root.child('distanceRooms').child($room).child('expiresAt').val() > now && root.child('distanceRooms').child($room).child('closed').val() === false && !data.exists() && newData.exists() && ((newData.child('id').val() === 'start' && root.child('distanceRooms').child($room).child('hostUid').val() === auth.uid && root.child('distanceRooms').child($room).child('game').child('state').child('phase').val() === 'setup' && root.child('distanceRooms').child($room).child('guestUid').val() !== '' && root.child('distanceRooms').child($room).child('ready').child(root.child('distanceRooms').child($room).child('hostUid').val()).val() === true && root.child('distanceRooms').child($room).child('ready').child(root.child('distanceRooms').child($room).child('guestUid').val()).val() === true) || (newData.child('id').val() === 'nextMatch' && root.child('distanceRooms').child($room).child('game').child('state').child('phase').val() === 'winner' && root.child('distanceRooms').child($room).child('game').child('state').child('match').val() < 3) || (root.child('distanceRooms').child($room).child('game').child('state').child('phase').val() === 'playing' && (newData.child('id').val() === 'nervous' || (((root.child('distanceRooms').child($room).child('game').child('state').child('turn').val() === 0 && root.child('distanceRooms').child($room).child('hostUid').val() === auth.uid) || (root.child('distanceRooms').child($room).child('game').child('state').child('turn').val() === 1 && root.child('distanceRooms').child($room).child('guestUid').val() === auth.uid)) && ((newData.child('id').val() === 'complete' && root.child('distanceRooms').child($room).child('game').child('state').child('submitted').val() === true && ((root.child('distanceRooms').child($room).child('game').child('state').child('mode').val() === 'classic' && (root.child('distanceRooms').child($room).child('game').child('state').child('level').val() !== 4 || root.child('distanceRooms').child($room).child('game').child('state').child('revealed').val() === true)) || (root.child('distanceRooms').child($room).child('game').child('state').child('mode').val() !== 'classic' && root.child('distanceRooms').child($room).child('game').child('state').child('custom').val() !== ''))) || (newData.child('id').val() === 'retry' && root.child('distanceRooms').child($room).child('game').child('state').child('submitted').val() === true) || (newData.child('id').val() === 'reveal' && root.child('distanceRooms').child($room).child('game').child('state').child('mode').val() === 'classic' && root.child('distanceRooms').child($room).child('game').child('state').child('level').val() === 4 && root.child('distanceRooms').child($room).child('game').child('state').child('revealed').val() === false) || (newData.child('id').val() === 'setCustom' && root.child('distanceRooms').child($room).child('game').child('state').child('mode').val() !== 'classic' && root.child('distanceRooms').child($room).child('game').child('state').child('custom').val() === '' && root.child('distanceRooms').child($room).child('game').child('state').child('submitted').val() === false))) || (((root.child('distanceRooms').child($room).child('game').child('state').child('turn').val() === 1 && root.child('distanceRooms').child($room).child('hostUid').val() === auth.uid) || (root.child('distanceRooms').child($room).child('game').child('state').child('turn').val() === 0 && root.child('distanceRooms').child($room).child('guestUid').val() === auth.uid)) && root.child('distanceRooms').child($room).child('game').child('state').child('submitted').val() === false && ((root.child('distanceRooms').child($room).child('game').child('state').child('mode').val() === 'classic' && (root.child('distanceRooms').child($room).child('game').child('state').child('level').val() !== 4 || root.child('distanceRooms').child($room).child('game').child('state').child('revealed').val() === true)) || (root.child('distanceRooms').child($room).child('game').child('state').child('mode').val() !== 'classic' && root.child('distanceRooms').child($room).child('game').child('state').child('custom').val() !== '')) && ((newData.child('id').val() === 'submitAnswer' && root.child('distanceRooms').child($room).child('game').child('state').child('responseType').val() === 'text') || (newData.child('id').val() === 'evidenceSent' && (root.child('distanceRooms').child($room).child('game').child('state').child('responseType').val() === 'photo' || root.child('distanceRooms').child($room).child('game').child('state').child('responseType').val() === 'video')))))))) || (auth != null && root.child('distanceRooms').child($room).child('hostUid').val() === auth.uid && root.child('distanceRooms').child($room).child('expiresAt').val() > now && !newData.exists())",
+            ".validate": "newData.hasChildren(['id','uid','at','revision','text','media'])",
+            "id": {
+              ".validate": "newData.val() === \"start\" || newData.val() === \"nextMatch\" || newData.val() === \"nervous\" || newData.val() === \"reveal\" || newData.val() === \"setCustom\" || newData.val() === \"submitAnswer\" || newData.val() === \"evidenceSent\" || newData.val() === \"retry\" || newData.val() === \"complete\""
+            },
+            "uid": {
+              ".validate": "newData.val() === auth.uid"
+            },
+            "at": {
+              ".validate": "newData.val() === now"
+            },
+            "revision": {
+              ".validate": "newData.isNumber() && newData.val() === root.child('distanceRooms').child($room).child('game').child('revision').val()"
+            },
+            "text": {
+              ".validate": "newData.isString() && newData.val().length <= 2000 && ((newData.parent().child('id').val() !== 'setCustom' && newData.parent().child('id').val() !== 'submitAnswer') || newData.val().length > 0) && (newData.parent().child('id').val() !== 'setCustom' || newData.val().length <= 1000)"
+            },
+            "media": {
+              ".validate": "newData.val() === \"photo\" || newData.val() === \"video\""
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "$other": {
+          ".validate": false
+        },
+        "ready": {
+          "$uid": {
+            ".write": "auth != null && (root.child('distanceRooms').child($room).child('hostUid').val() === auth.uid || root.child('distanceRooms').child($room).child('guestUid').val() === auth.uid) && root.child('distanceRooms').child($room).child('expiresAt').val() > now && root.child('distanceRooms').child($room).child('closed').val() === false && auth.uid === $uid",
+            ".validate": "newData.isBoolean()"
+          }
+        },
+        "presence": {
+          "$uid": {
+            ".write": "auth != null && (root.child('distanceRooms').child($room).child('hostUid').val() === auth.uid || root.child('distanceRooms').child($room).child('guestUid').val() === auth.uid) && root.child('distanceRooms').child($room).child('expiresAt').val() > now && root.child('distanceRooms').child($room).child('closed').val() === false && auth.uid === $uid",
+            ".validate": "newData.isBoolean()"
+          }
+        }
+      }
     }
   }
 }
