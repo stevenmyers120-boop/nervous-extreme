@@ -1,0 +1,79 @@
+{
+  "libraryVersion": "adult-v2",
+  "concepts": 500,
+  "contactCards": 105,
+  "contactByStage": {
+    "warm_up": 10,
+    "getting_personal": 39,
+    "extreme": 56
+  },
+  "inPersonKinds": {
+    "truth": 346,
+    "dare": 154
+  },
+  "remoteEvidence": {
+    "text": 451,
+    "photo": 47,
+    "video": 2
+  },
+  "vocabularyOccurrencesInPersonSteps": {
+    "Sex": 42,
+    "Fuck": 5,
+    "Cock": 10,
+    "Dick": 11,
+    "Penis": 24,
+    "Pussy": 10,
+    "Vagina": 16,
+    "Tits": 4,
+    "Boobs": 7,
+    "Breasts": 15,
+    "Nipples": 3,
+    "Arse": 4,
+    "Bum": 4,
+    "Balls": 5,
+    "Underwear": 24,
+    "Thong": 7,
+    "Naked": 4,
+    "Strip": 2,
+    "Horny": 5,
+    "Turned on": 5,
+    "Masturbation": 6,
+    "Wank": 2,
+    "Oral sex": 4,
+    "Blowjob": 3,
+    "Anal sex": 3,
+    "Orgasm": 9,
+    "Pubic hair": 9,
+    "Kink": 6,
+    "Fetish": 5,
+    "Dirty talk": 4
+  },
+  "similarityMethod": "TF-IDF cosine, common instruction words and evidence suffixes removed",
+  "threshold": 0.6,
+  "candidates": [
+    {
+      "mode": "remote",
+      "a": "remote-adult-v2-getting_personal-147",
+      "b": "remote-adult-v2-extreme-271",
+      "titles": [
+        "SEX WORD ON YOUR ARM",
+        "FOREARM FILTH"
+      ],
+      "similarity": 0.634
+    }
+  ],
+  "limits": [
+    "Vocabulary counts exclude titles and count only in-person prompts, so shared variants are not double-counted.",
+    "Recurring themes and contact endpoints are expected; similarity is only a review prompt, not proof of conceptual distinction or escalation."
+  ],
+  "editorialReview": [
+    {
+      "titles": [
+        "SEX WORD ON YOUR ARM",
+        "FOREARM FILTH"
+      ],
+      "decision": "Retained as separate concepts",
+      "reason": "One is self-selected adult lettering; the other is a partner-created crude drawing and caption. The shared forearm/material/evidence vocabulary triggered screening."
+    }
+  ]
+}

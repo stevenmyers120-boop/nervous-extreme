@@ -13,3 +13,13 @@ test('full authored library: counts, unique variants, complete metadata, five es
     assert.ok(cards.some(c=>c.conceptId===card.conceptId&&c.mode!==card.mode));
   }
 });
+test('adult-v2 content scope: substantial contact pool, agreed vocabulary and no performance filler',()=>{
+  assert.equal(data.libraryVersion,'adult-v2');
+  const local=cards.filter(c=>c.mode==='in_person');
+  assert.ok(local.filter(c=>c.contact).length>=100);
+  assert.ok(local.every(c=>c.id.includes('adult-v2-')));
+  assert.ok(local.every(c=>!['performance','creativity','personality','music','nightlife'].includes(c.category)));
+  const text=local.map(c=>c.title+' '+c.steps.map(s=>s.prompt).join(' ')).join(' ');
+  for(const word of ['sex','fuck','cock','dick','penis','pussy','vagina','tits','boobs','breasts','nipples','arse','bum','balls','underwear','thong','naked','strip','horny','turned on','masturbation','wank','oral sex','blowjob','anal sex','orgasm','pubic hair','kink','fetish','dirty talk'])assert.ok(text.toLowerCase().includes(word),'Missing adult term: '+word);
+  assert.doesNotMatch(text,/charades|weather report|press conference|soap opera|radio jingle|silly acting/i);
+});

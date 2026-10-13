@@ -13,9 +13,9 @@ The original root game remains unchanged. Every original tracked file matches ba
 - No repeated concept within a game, eligible current-stage selection, fresh pools for new games and graceful stage exhaustion.
 - Decline skips without points. Stop closes the local game immediately, queues deletion even while offline and retries after reconnect/session resume. Late callbacks from the ended session cannot overwrite the final message. Submitted answers clear at the next step; selection history clears at championship completion.
 
-## Challenge library
+## Challenge library — adult-v2
 
-The owner approved the provocative, non-graphic adult scope on 13 October 2026. The library has **500 authored concepts, 1,000 mode variants and 5,000 steps**. Editable packed source is in `library-source/`; `scripts/build-library.mjs` produces the maintainable JSON.
+The library was completely rewritten after the owner rejected the previous deck's tone. Every card is now adult-personal or sexually relevant, with 105 contact-centred cards and 154 in-person dares. All 30 agreed terms are represented. See `CONTENT-REVIEW.md` and `content-audit.json`. The library has **500 authored concepts, 1,000 mode variants and 5,000 steps**. Editable packed source is in `library-source/`; `scripts/build-library.mjs` produces the maintainable JSON.
 
 | Stage | In Person | Remote |
 |---|---:|---:|
@@ -24,7 +24,7 @@ The owner approved the provocative, non-graphic adult scope on 13 October 2026. 
 | Extreme | 300 | 300 |
 | Total | 500 | 500 |
 
-Each variant has its own ID, title, stage, category, mode, five progressive prompts and evidence metadata. Physical adaptations are authored alongside their remote alternatives. Exact-duplicate, token and TF-IDF screens found no candidates at their configured thresholds. Similarity screens do not prove semantic uniqueness; the authored ladders were inspected for disclosure/performance progression and practical evidence.
+Each variant has its own ID, title, stage, category, mode, five progressive prompts and evidence metadata. Physical adaptations are authored alongside their remote alternatives. Exact-duplicate and token screens found no candidates. TF-IDF review led to several concept rewrites; one shared forearm-art motif is documented and retained as two different authored objectives. Similarity screens do not prove semantic uniqueness; the authored ladders were inspected for disclosure/performance progression and practical evidence.
 
 ## Isolated Firebase
 
@@ -36,9 +36,9 @@ Rules restrict membership, guest claims, readiness, revision-tagged actions, rol
 
 ## Verification — 13 October 2026
 
-See `QA-REPORT.md`, `test-results.txt` and `hosted-test-results.txt`.
+See `QA-REPORT.md`, `CONTENT-REVIEW.md`, `test-results.txt` and `hosted-test-results.txt`.
 
-- 11 engine/library/actual-control emulator tests passed.
+- 12 engine/library/actual-control emulator tests passed, including adult-v2 content coverage and old-room compatibility.
 - 3 tests with actual anonymous accounts and independent connections to hosted staging Firebase passed.
 - Chromium browser checks passed for joining, both modes, conductor rotation, scoring, text, custom truths/dares, final-step reveal, resume and Stop.
 - Four phone-sized iframe viewports were inspected and exercised: 360×740, 390×844, 414×896, 740×360. No horizontal content overflow; setup, completion, Decline and Stop worked.
@@ -56,3 +56,5 @@ npm run test:hosted
 ```
 
 Hosted tests guard against any project except the isolated test project and create disposable anonymous accounts/rooms. Expected permission-denied warnings are negative security tests. For an environment with an outbound proxy, exclude loopback or remove proxy variables only from the emulator-test child process; do not remove the external networking configuration from hosted tests. `qa.html` provides the browser layout fixtures.
+
+Existing rooms from the earlier library must stop and restart after both devices reload. The IDs and version check deliberately prevent silent challenge substitution. Previous content remains in Git at `e292c9a0f4ec742630b468d4da6f71ca285b1807`.
