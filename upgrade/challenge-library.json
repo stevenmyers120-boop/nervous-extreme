@@ -1,0 +1,1869 @@
+{
+  "schemaVersion": 1,
+  "status": "starter-library-not-full-500",
+  "notes": [
+    "30 non-graphic concepts; the requested explicit challenge library is not included."
+  ],
+  "challenges": [
+    {
+      "id": "in-wa-001",
+      "conceptId": "wa-001",
+      "title": "First Impressions",
+      "stage": "warm_up",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Say what you first noticed about the other player.",
+          "type": "live"
+        },
+        {
+          "prompt": "Name the feature you find most attractive.",
+          "type": "live"
+        },
+        {
+          "prompt": "Describe the moment they caught your attention.",
+          "type": "live"
+        },
+        {
+          "prompt": "Admit an assumption you made about them.",
+          "type": "live"
+        },
+        {
+          "prompt": "Tell them exactly what you thought when you first met.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-wa-001",
+      "conceptId": "wa-001",
+      "title": "First Impressions",
+      "stage": "warm_up",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Say what you first noticed about the other player.",
+          "type": "text"
+        },
+        {
+          "prompt": "Name the feature you find most attractive.",
+          "type": "text"
+        },
+        {
+          "prompt": "Describe the moment they caught your attention.",
+          "type": "text"
+        },
+        {
+          "prompt": "Admit an assumption you made about them.",
+          "type": "text"
+        },
+        {
+          "prompt": "Tell them exactly what you thought when you first met.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-wa-002",
+      "conceptId": "wa-002",
+      "title": "Dirty Vocabulary",
+      "stage": "warm_up",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Say a word you consider rude.",
+          "type": "live"
+        },
+        {
+          "prompt": "Say a word you would never use at work.",
+          "type": "live"
+        },
+        {
+          "prompt": "Tell the other player your favourite filthy expression.",
+          "type": "live"
+        },
+        {
+          "prompt": "Use a swear word in an outrageous compliment.",
+          "type": "live"
+        },
+        {
+          "prompt": "Deliver your dirtiest joke without laughing.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-wa-002",
+      "conceptId": "wa-002",
+      "title": "Dirty Vocabulary",
+      "stage": "warm_up",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Say a word you consider rude.",
+          "type": "text"
+        },
+        {
+          "prompt": "Say a word you would never use at work.",
+          "type": "text"
+        },
+        {
+          "prompt": "Write to the other player your favourite filthy expression.",
+          "type": "text"
+        },
+        {
+          "prompt": "Use a swear word in an outrageous compliment.",
+          "type": "text"
+        },
+        {
+          "prompt": "Deliver your dirtiest joke without laughing.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-wa-003",
+      "conceptId": "wa-003",
+      "title": "First Kiss",
+      "stage": "warm_up",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Describe your first kiss.",
+          "type": "live"
+        },
+        {
+          "prompt": "Say how old you were.",
+          "type": "live"
+        },
+        {
+          "prompt": "Admit what went wrong, if anything.",
+          "type": "live"
+        },
+        {
+          "prompt": "Describe your most awkward kiss.",
+          "type": "live"
+        },
+        {
+          "prompt": "Tell the other player what you wish you had known then.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-wa-003",
+      "conceptId": "wa-003",
+      "title": "First Kiss",
+      "stage": "warm_up",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Describe your first kiss.",
+          "type": "text"
+        },
+        {
+          "prompt": "Say how old you were.",
+          "type": "text"
+        },
+        {
+          "prompt": "Admit what went wrong, if anything.",
+          "type": "text"
+        },
+        {
+          "prompt": "Describe your most awkward kiss.",
+          "type": "text"
+        },
+        {
+          "prompt": "Write to the other player what you wish you had known then.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-wa-004",
+      "conceptId": "wa-004",
+      "title": "Attraction Radar",
+      "stage": "warm_up",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Name a trait that catches your eye.",
+          "type": "live"
+        },
+        {
+          "prompt": "Name an unexpected turn-on.",
+          "type": "live"
+        },
+        {
+          "prompt": "Admit a type you once had.",
+          "type": "live"
+        },
+        {
+          "prompt": "Reveal an attraction that surprised you.",
+          "type": "live"
+        },
+        {
+          "prompt": "Tell the other player which of your tastes would shock your friends.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-wa-004",
+      "conceptId": "wa-004",
+      "title": "Attraction Radar",
+      "stage": "warm_up",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Name a trait that catches your eye.",
+          "type": "text"
+        },
+        {
+          "prompt": "Name an unexpected turn-on.",
+          "type": "text"
+        },
+        {
+          "prompt": "Admit a type you once had.",
+          "type": "text"
+        },
+        {
+          "prompt": "Reveal an attraction that surprised you.",
+          "type": "text"
+        },
+        {
+          "prompt": "Write to the other player which of your tastes would shock your friends.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-wa-005",
+      "conceptId": "wa-005",
+      "title": "Have You Ever",
+      "stage": "warm_up",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Have you ever sent a message to the wrong person?",
+          "type": "live"
+        },
+        {
+          "prompt": "Have you ever flirted to get a favour?",
+          "type": "live"
+        },
+        {
+          "prompt": "Have you ever pretended not to fancy someone?",
+          "type": "live"
+        },
+        {
+          "prompt": "Have you ever been caught staring?",
+          "type": "live"
+        },
+        {
+          "prompt": "Have you ever admitted a crush at the worst possible moment?",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-wa-005",
+      "conceptId": "wa-005",
+      "title": "Have You Ever",
+      "stage": "warm_up",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Have you ever sent a message to the wrong person?",
+          "type": "text"
+        },
+        {
+          "prompt": "Have you ever flirted to get a favour?",
+          "type": "text"
+        },
+        {
+          "prompt": "Have you ever pretended not to fancy someone?",
+          "type": "text"
+        },
+        {
+          "prompt": "Have you ever been caught staring?",
+          "type": "text"
+        },
+        {
+          "prompt": "Have you ever admitted a crush at the worst possible moment?",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-wa-006",
+      "conceptId": "wa-006",
+      "title": "The Compliment",
+      "stage": "warm_up",
+      "category": "dare",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Give the other player one sincere compliment.",
+          "type": "live"
+        },
+        {
+          "prompt": "Compliment their sense of style.",
+          "type": "live"
+        },
+        {
+          "prompt": "Tell them what makes them attractive.",
+          "type": "live"
+        },
+        {
+          "prompt": "Make your compliment outrageously dramatic.",
+          "type": "live"
+        },
+        {
+          "prompt": "Deliver a 20-second flirtatious speech without breaking eye contact.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-wa-006",
+      "conceptId": "wa-006",
+      "title": "The Compliment",
+      "stage": "warm_up",
+      "category": "dare",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Send the other player one sincere compliment.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Compliment their sense of style.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Tell them what makes them attractive.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Make your compliment outrageously dramatic.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Deliver a 20-second flirtatious speech without breaking eye contact.",
+          "type": "photo"
+        }
+      ],
+      "completion": "photo"
+    },
+    {
+      "id": "in-wa-007",
+      "conceptId": "wa-007",
+      "title": "Blushing Contest",
+      "stage": "warm_up",
+      "category": "dare",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Look the other player in the eyes for ten seconds.",
+          "type": "live"
+        },
+        {
+          "prompt": "Say one thing that makes you blush.",
+          "type": "live"
+        },
+        {
+          "prompt": "Tell them your most embarrassing compliment.",
+          "type": "live"
+        },
+        {
+          "prompt": "Try to make them blush with a cheeky remark.",
+          "type": "live"
+        },
+        {
+          "prompt": "Hold eye contact while admitting a secret crush from your past.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-wa-007",
+      "conceptId": "wa-007",
+      "title": "Blushing Contest",
+      "stage": "warm_up",
+      "category": "dare",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Look into the camera for ten seconds.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Say one thing that makes you blush.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Tell them your most embarrassing compliment.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Try to make them blush with a cheeky remark.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Look into the camera while admitting a secret crush from your past.",
+          "type": "photo"
+        }
+      ],
+      "completion": "photo"
+    },
+    {
+      "id": "in-wa-008",
+      "conceptId": "wa-008",
+      "title": "Dating Disasters",
+      "stage": "warm_up",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Describe your worst date.",
+          "type": "live"
+        },
+        {
+          "prompt": "Admit your worst chat-up line.",
+          "type": "live"
+        },
+        {
+          "prompt": "Describe a disastrous romantic text.",
+          "type": "live"
+        },
+        {
+          "prompt": "Reveal a date you left early and why.",
+          "type": "live"
+        },
+        {
+          "prompt": "Re-enact your most embarrassing dating moment.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-wa-008",
+      "conceptId": "wa-008",
+      "title": "Dating Disasters",
+      "stage": "warm_up",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Describe your worst date.",
+          "type": "text"
+        },
+        {
+          "prompt": "Admit your worst chat-up line.",
+          "type": "text"
+        },
+        {
+          "prompt": "Describe a disastrous romantic text.",
+          "type": "text"
+        },
+        {
+          "prompt": "Reveal a date you left early and why.",
+          "type": "text"
+        },
+        {
+          "prompt": "Re-enact your most embarrassing dating moment.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-wa-009",
+      "conceptId": "wa-009",
+      "title": "Underwear Basics",
+      "stage": "warm_up",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Name your favourite underwear colour.",
+          "type": "live"
+        },
+        {
+          "prompt": "Say whether you favour comfort or style.",
+          "type": "live"
+        },
+        {
+          "prompt": "Describe your most ridiculous underwear purchase.",
+          "type": "live"
+        },
+        {
+          "prompt": "Admit whether you have ever worn mismatched underwear.",
+          "type": "live"
+        },
+        {
+          "prompt": "Tell the other player your funniest underwear-related disaster.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-wa-009",
+      "conceptId": "wa-009",
+      "title": "Underwear Basics",
+      "stage": "warm_up",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Name your favourite underwear colour.",
+          "type": "text"
+        },
+        {
+          "prompt": "Say whether you favour comfort or style.",
+          "type": "text"
+        },
+        {
+          "prompt": "Describe your most ridiculous underwear purchase.",
+          "type": "text"
+        },
+        {
+          "prompt": "Admit whether you have ever worn mismatched underwear.",
+          "type": "text"
+        },
+        {
+          "prompt": "Write to the other player your funniest underwear-related disaster.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-wa-010",
+      "conceptId": "wa-010",
+      "title": "The Wink",
+      "stage": "warm_up",
+      "category": "dare",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Give the other player a wink.",
+          "type": "live"
+        },
+        {
+          "prompt": "Try a deliberately exaggerated seductive look.",
+          "type": "live"
+        },
+        {
+          "prompt": "Hold your best pose for five seconds.",
+          "type": "live"
+        },
+        {
+          "prompt": "Deliver a ridiculous chat-up line in character.",
+          "type": "live"
+        },
+        {
+          "prompt": "Perform a ten-second entrance as your most outrageous alter ego.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-wa-010",
+      "conceptId": "wa-010",
+      "title": "The Wink",
+      "stage": "warm_up",
+      "category": "dare",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Send the other player a wink.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Try a deliberately exaggerated seductive look.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Hold your best pose for five seconds.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Deliver a ridiculous chat-up line in character.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Perform a ten-second entrance as your most outrageous alter ego.",
+          "type": "photo"
+        }
+      ],
+      "completion": "photo"
+    },
+    {
+      "id": "in-ge-001",
+      "conceptId": "ge-001",
+      "title": "Sex Talk",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Say when you first learned what sex was.",
+          "type": "live"
+        },
+        {
+          "prompt": "Describe the most awkward sex talk you have had.",
+          "type": "live"
+        },
+        {
+          "prompt": "Admit a sex myth you once believed.",
+          "type": "live"
+        },
+        {
+          "prompt": "Reveal a question about sex you were embarrassed to ask.",
+          "type": "live"
+        },
+        {
+          "prompt": "Tell the other player the most awkward thing you have ever said about sex.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ge-001",
+      "conceptId": "ge-001",
+      "title": "Sex Talk",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Say when you first learned what sex was.",
+          "type": "text"
+        },
+        {
+          "prompt": "Describe the most awkward sex talk you have had.",
+          "type": "text"
+        },
+        {
+          "prompt": "Admit a sex myth you once believed.",
+          "type": "text"
+        },
+        {
+          "prompt": "Reveal a question about sex you were embarrassed to ask.",
+          "type": "text"
+        },
+        {
+          "prompt": "Write to the other player the most awkward thing you have ever said about sex.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-ge-002",
+      "conceptId": "ge-002",
+      "title": "Private Questions",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Ask the other player a personal dating question.",
+          "type": "live"
+        },
+        {
+          "prompt": "Ask about their most embarrassing romantic moment.",
+          "type": "live"
+        },
+        {
+          "prompt": "Ask what makes them feel attractive.",
+          "type": "live"
+        },
+        {
+          "prompt": "Ask about an intimate topic they think people avoid discussing.",
+          "type": "live"
+        },
+        {
+          "prompt": "Ask the boldest personal question you can think of; they can choose Nervous.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ge-002",
+      "conceptId": "ge-002",
+      "title": "Private Questions",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Message the other player a personal dating question.",
+          "type": "text"
+        },
+        {
+          "prompt": "Ask about their most embarrassing romantic moment.",
+          "type": "text"
+        },
+        {
+          "prompt": "Ask what makes them feel attractive.",
+          "type": "text"
+        },
+        {
+          "prompt": "Ask about an intimate topic they think people avoid discussing.",
+          "type": "text"
+        },
+        {
+          "prompt": "Ask the boldest personal question you can think of; they can choose Nervous.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-ge-003",
+      "conceptId": "ge-003",
+      "title": "The Confession",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Admit a harmless lie you told on a date.",
+          "type": "live"
+        },
+        {
+          "prompt": "Confess a crush you kept secret.",
+          "type": "live"
+        },
+        {
+          "prompt": "Reveal a flirtatious message you regretted.",
+          "type": "live"
+        },
+        {
+          "prompt": "Describe a romantic mistake you still remember.",
+          "type": "live"
+        },
+        {
+          "prompt": "Tell the other player a personal secret you have never shared with them.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ge-003",
+      "conceptId": "ge-003",
+      "title": "The Confession",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Admit a harmless lie you told on a date.",
+          "type": "text"
+        },
+        {
+          "prompt": "Confess a crush you kept secret.",
+          "type": "text"
+        },
+        {
+          "prompt": "Reveal a flirtatious message you regretted.",
+          "type": "text"
+        },
+        {
+          "prompt": "Describe a romantic mistake you still remember.",
+          "type": "text"
+        },
+        {
+          "prompt": "Write to the other player a personal secret you have never shared with them.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-ge-004",
+      "conceptId": "ge-004",
+      "title": "Body Confidence",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Name a feature you like about yourself.",
+          "type": "live"
+        },
+        {
+          "prompt": "Say what outfit makes you feel confident.",
+          "type": "live"
+        },
+        {
+          "prompt": "Admit a body insecurity you have overcome.",
+          "type": "live"
+        },
+        {
+          "prompt": "Describe a time you felt unexpectedly sexy.",
+          "type": "live"
+        },
+        {
+          "prompt": "Tell the other player something about your body image you rarely discuss.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ge-004",
+      "conceptId": "ge-004",
+      "title": "Body Confidence",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Name a feature you like about yourself.",
+          "type": "text"
+        },
+        {
+          "prompt": "Say what outfit makes you feel confident.",
+          "type": "text"
+        },
+        {
+          "prompt": "Admit a body insecurity you have overcome.",
+          "type": "text"
+        },
+        {
+          "prompt": "Describe a time you felt unexpectedly sexy.",
+          "type": "text"
+        },
+        {
+          "prompt": "Write to the other player something about your body image you rarely discuss.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-ge-005",
+      "conceptId": "ge-005",
+      "title": "Sexual Curiosity",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Say whether you find it easy to discuss sex.",
+          "type": "live"
+        },
+        {
+          "prompt": "Name a sexual topic you think is misunderstood.",
+          "type": "live"
+        },
+        {
+          "prompt": "Explain your view on discussing masturbation openly.",
+          "type": "live"
+        },
+        {
+          "prompt": "Say whether you have ever felt embarrassed discussing oral sex.",
+          "type": "live"
+        },
+        {
+          "prompt": "Ask the other player a blunt question about sexual attitudes.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ge-005",
+      "conceptId": "ge-005",
+      "title": "Sexual Curiosity",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Say whether you find it easy to discuss sex.",
+          "type": "text"
+        },
+        {
+          "prompt": "Name a sexual topic you think is misunderstood.",
+          "type": "text"
+        },
+        {
+          "prompt": "Explain your view on discussing masturbation openly.",
+          "type": "text"
+        },
+        {
+          "prompt": "Say whether you have ever felt embarrassed discussing oral sex.",
+          "type": "text"
+        },
+        {
+          "prompt": "Message the other player a blunt question about sexual attitudes.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-ge-006",
+      "conceptId": "ge-006",
+      "title": "Kink Conversation",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Explain what the word kink means to you.",
+          "type": "live"
+        },
+        {
+          "prompt": "Name a harmless unusual preference you have heard of.",
+          "type": "live"
+        },
+        {
+          "prompt": "Say whether you think people judge fetishes unfairly.",
+          "type": "live"
+        },
+        {
+          "prompt": "Discuss a kink you once misunderstood.",
+          "type": "live"
+        },
+        {
+          "prompt": "Admit which sexual topic you would find hardest to discuss face-to-face.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ge-006",
+      "conceptId": "ge-006",
+      "title": "Kink Conversation",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Explain what the word kink means to you.",
+          "type": "text"
+        },
+        {
+          "prompt": "Name a harmless unusual preference you have heard of.",
+          "type": "text"
+        },
+        {
+          "prompt": "Say whether you think people judge fetishes unfairly.",
+          "type": "text"
+        },
+        {
+          "prompt": "Discuss a kink you once misunderstood.",
+          "type": "text"
+        },
+        {
+          "prompt": "Admit which sexual topic you would find hardest to discuss face-to-face.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-ge-007",
+      "conceptId": "ge-007",
+      "title": "The Outfit Dare",
+      "stage": "getting_personal",
+      "category": "dare",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Show your favourite accessory.",
+          "type": "live"
+        },
+        {
+          "prompt": "Put together an intentionally over-the-top look.",
+          "type": "live"
+        },
+        {
+          "prompt": "Pose as though you are modelling it.",
+          "type": "live"
+        },
+        {
+          "prompt": "Give the outfit a filthy-minded name.",
+          "type": "live"
+        },
+        {
+          "prompt": "Perform a dramatic runway walk and introduce yourself with that name.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ge-007",
+      "conceptId": "ge-007",
+      "title": "The Outfit Dare",
+      "stage": "getting_personal",
+      "category": "dare",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Show your favourite accessory.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Put together an intentionally over-the-top look.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Pose as though you are modelling it.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Give the outfit a filthy-minded name.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Perform a dramatic runway walk and introduce yourself with that name.",
+          "type": "photo"
+        }
+      ],
+      "completion": "photo"
+    },
+    {
+      "id": "in-ge-008",
+      "conceptId": "ge-008",
+      "title": "Awkward Memories",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Describe an embarrassing wardrobe malfunction.",
+          "type": "live"
+        },
+        {
+          "prompt": "Recall being caught saying something rude.",
+          "type": "live"
+        },
+        {
+          "prompt": "Tell a story about a romantic misunderstanding.",
+          "type": "live"
+        },
+        {
+          "prompt": "Admit the most embarrassing place you have fallen asleep.",
+          "type": "live"
+        },
+        {
+          "prompt": "Re-enact your most humiliating flirtation in full.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ge-008",
+      "conceptId": "ge-008",
+      "title": "Awkward Memories",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Describe an embarrassing wardrobe malfunction.",
+          "type": "text"
+        },
+        {
+          "prompt": "Recall being caught saying something rude.",
+          "type": "text"
+        },
+        {
+          "prompt": "Tell a story about a romantic misunderstanding.",
+          "type": "text"
+        },
+        {
+          "prompt": "Admit the most embarrassing place you have fallen asleep.",
+          "type": "text"
+        },
+        {
+          "prompt": "Re-enact your most humiliating flirtation in full.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-ge-009",
+      "conceptId": "ge-009",
+      "title": "Truth Under Pressure",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Answer what you notice first in someone.",
+          "type": "live"
+        },
+        {
+          "prompt": "Admit your worst dating habit.",
+          "type": "live"
+        },
+        {
+          "prompt": "Name an intimate conversation you avoid.",
+          "type": "live"
+        },
+        {
+          "prompt": "Confess something you have pretended to understand about sex.",
+          "type": "live"
+        },
+        {
+          "prompt": "Reveal the most embarrassing honest answer you have given on a date.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ge-009",
+      "conceptId": "ge-009",
+      "title": "Truth Under Pressure",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Answer what you notice first in someone.",
+          "type": "text"
+        },
+        {
+          "prompt": "Admit your worst dating habit.",
+          "type": "text"
+        },
+        {
+          "prompt": "Name an intimate conversation you avoid.",
+          "type": "text"
+        },
+        {
+          "prompt": "Confess something you have pretended to understand about sex.",
+          "type": "text"
+        },
+        {
+          "prompt": "Reveal the most embarrassing honest answer you have given on a date.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-ge-010",
+      "conceptId": "ge-010",
+      "title": "Secret Nicknames",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Give yourself a ridiculous romantic nickname.",
+          "type": "live"
+        },
+        {
+          "prompt": "Give the other player a cheeky nickname.",
+          "type": "live"
+        },
+        {
+          "prompt": "Explain the worst nickname you have had.",
+          "type": "live"
+        },
+        {
+          "prompt": "Invent an outrageous couple nickname for the two of you.",
+          "type": "live"
+        },
+        {
+          "prompt": "Introduce both of you in character using the nicknames for 30 seconds.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ge-010",
+      "conceptId": "ge-010",
+      "title": "Secret Nicknames",
+      "stage": "getting_personal",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Give yourself a ridiculous romantic nickname.",
+          "type": "text"
+        },
+        {
+          "prompt": "Send the other player a cheeky nickname.",
+          "type": "text"
+        },
+        {
+          "prompt": "Explain the worst nickname you have had.",
+          "type": "text"
+        },
+        {
+          "prompt": "Invent an outrageous couple nickname for the two of you.",
+          "type": "text"
+        },
+        {
+          "prompt": "Introduce both of you in character using the nicknames for 30 seconds.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-ex-001",
+      "conceptId": "ex-001",
+      "title": "Human Canvas",
+      "stage": "extreme",
+      "category": "dare",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Get a skin-safe pen and offer your arm so the other player can draw a small heart on it.",
+          "type": "live"
+        },
+        {
+          "prompt": "Let the other player draw a rude cartoon under your outer clothing.",
+          "type": "live"
+        },
+        {
+          "prompt": "Let the other player write a rude comment in the same area.",
+          "type": "live"
+        },
+        {
+          "prompt": "Invite a heart to be drawn on an agreed patch of skin usually covered by clothing.",
+          "type": "live"
+        },
+        {
+          "prompt": "Let the other player write an outrageous phrase on an agreed area of skin, moving outer clothing to reveal the space.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ex-001",
+      "conceptId": "ex-001",
+      "title": "Human Canvas",
+      "stage": "extreme",
+      "category": "dare",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Get a skin-safe pen and offer your arm so you can draw a small heart on it.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Draw a rude cartoon under your outer clothing.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Let the other player write a rude comment in the same area.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Invite a heart to be drawn on an agreed patch of skin usually covered by clothing.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Write an outrageous phrase on your chosen area of skin, moving outer clothing to reveal the space.",
+          "type": "photo"
+        }
+      ],
+      "completion": "photo"
+    },
+    {
+      "id": "in-ex-002",
+      "conceptId": "ex-002",
+      "title": "Dirty Little Secrets",
+      "stage": "extreme",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "What is the most embarrassing thing that happened to you during sex?",
+          "type": "live"
+        },
+        {
+          "prompt": "Have you ever lied about your sexual experience?",
+          "type": "live"
+        },
+        {
+          "prompt": "What is a sexual topic you would never discuss with friends?",
+          "type": "live"
+        },
+        {
+          "prompt": "Have you ever been caught doing something private?",
+          "type": "live"
+        },
+        {
+          "prompt": "What is your biggest sexual secret that the other player does not know?",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ex-002",
+      "conceptId": "ex-002",
+      "title": "Dirty Little Secrets",
+      "stage": "extreme",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "What is the most embarrassing thing that happened to you during sex?",
+          "type": "text"
+        },
+        {
+          "prompt": "Have you ever lied about your sexual experience?",
+          "type": "text"
+        },
+        {
+          "prompt": "What is a sexual topic you would never discuss with friends?",
+          "type": "text"
+        },
+        {
+          "prompt": "Have you ever been caught doing something private?",
+          "type": "text"
+        },
+        {
+          "prompt": "What is your biggest sexual secret that the other player does not know?",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-ex-003",
+      "conceptId": "ex-003",
+      "title": "No Filter",
+      "stage": "extreme",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Say the rudest word you use regularly.",
+          "type": "live"
+        },
+        {
+          "prompt": "Tell the other player your filthiest joke.",
+          "type": "live"
+        },
+        {
+          "prompt": "Confess the worst dirty joke you told at the wrong time.",
+          "type": "live"
+        },
+        {
+          "prompt": "Describe an embarrassing misunderstanding involving sexual slang.",
+          "type": "live"
+        },
+        {
+          "prompt": "Give a 30-second uncensored account of your most awkward adult conversation.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ex-003",
+      "conceptId": "ex-003",
+      "title": "No Filter",
+      "stage": "extreme",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Say the rudest word you use regularly.",
+          "type": "text"
+        },
+        {
+          "prompt": "Write to the other player your filthiest joke.",
+          "type": "text"
+        },
+        {
+          "prompt": "Confess the worst dirty joke you told at the wrong time.",
+          "type": "text"
+        },
+        {
+          "prompt": "Describe an embarrassing misunderstanding involving sexual slang.",
+          "type": "text"
+        },
+        {
+          "prompt": "Give a 30-second uncensored account of your most awkward adult conversation.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-ex-004",
+      "conceptId": "ex-004",
+      "title": "Underwear Confessions",
+      "stage": "extreme",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Tell the other player what kind of underwear you are wearing.",
+          "type": "live"
+        },
+        {
+          "prompt": "Describe your most embarrassing underwear purchase.",
+          "type": "live"
+        },
+        {
+          "prompt": "Admit whether you have ever gone out without underwear.",
+          "type": "live"
+        },
+        {
+          "prompt": "Reveal your most awkward underwear-related incident.",
+          "type": "live"
+        },
+        {
+          "prompt": "Tell the other player the underwear secret you would least want announced in public.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ex-004",
+      "conceptId": "ex-004",
+      "title": "Underwear Confessions",
+      "stage": "extreme",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Write to the other player what kind of underwear you are wearing.",
+          "type": "text"
+        },
+        {
+          "prompt": "Describe your most embarrassing underwear purchase.",
+          "type": "text"
+        },
+        {
+          "prompt": "Admit whether you have ever gone out without underwear.",
+          "type": "text"
+        },
+        {
+          "prompt": "Reveal your most awkward underwear-related incident.",
+          "type": "text"
+        },
+        {
+          "prompt": "Write to the other player the underwear secret you would least want announced in public.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-ex-005",
+      "conceptId": "ex-005",
+      "title": "Body Art Roulette",
+      "stage": "extreme",
+      "category": "dare",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Offer your forearm for a tiny doodle with a skin-safe pen.",
+          "type": "live"
+        },
+        {
+          "prompt": "Let the other player add a rude caption.",
+          "type": "live"
+        },
+        {
+          "prompt": "Choose a silly nickname to be written beside it.",
+          "type": "live"
+        },
+        {
+          "prompt": "Allow a larger cartoon to be drawn on an agreed area of skin.",
+          "type": "live"
+        },
+        {
+          "prompt": "Pose for a photograph of the finished ridiculous artwork.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ex-005",
+      "conceptId": "ex-005",
+      "title": "Body Art Roulette",
+      "stage": "extreme",
+      "category": "dare",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Use your forearm for a tiny doodle with a skin-safe pen.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Let the other player add a rude caption.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Choose a silly nickname to be written beside it.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Draw a larger cartoon on your chosen area of skin.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Pose for a photograph of the finished ridiculous artwork.",
+          "type": "photo"
+        }
+      ],
+      "completion": "photo"
+    },
+    {
+      "id": "in-ex-006",
+      "conceptId": "ex-006",
+      "title": "Pubic Hair Debate",
+      "stage": "extreme",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Say whether you think pubic hair is an awkward topic.",
+          "type": "live"
+        },
+        {
+          "prompt": "Describe the strangest grooming trend you have heard about.",
+          "type": "live"
+        },
+        {
+          "prompt": "Admit a grooming mistake you have made.",
+          "type": "live"
+        },
+        {
+          "prompt": "Explain whether you have ever changed your grooming style to impress someone.",
+          "type": "live"
+        },
+        {
+          "prompt": "Tell the other player your most embarrassing intimate-grooming story.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ex-006",
+      "conceptId": "ex-006",
+      "title": "Pubic Hair Debate",
+      "stage": "extreme",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Say whether you think pubic hair is an awkward topic.",
+          "type": "text"
+        },
+        {
+          "prompt": "Describe the strangest grooming trend you have heard about.",
+          "type": "text"
+        },
+        {
+          "prompt": "Admit a grooming mistake you have made.",
+          "type": "text"
+        },
+        {
+          "prompt": "Explain whether you have ever changed your grooming style to impress someone.",
+          "type": "text"
+        },
+        {
+          "prompt": "Write to the other player your most embarrassing intimate-grooming story.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-ex-007",
+      "conceptId": "ex-007",
+      "title": "The Brutal Question",
+      "stage": "extreme",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Ask a question about attraction.",
+          "type": "live"
+        },
+        {
+          "prompt": "Ask a question about dating history.",
+          "type": "live"
+        },
+        {
+          "prompt": "Ask a question about sexual embarrassment.",
+          "type": "live"
+        },
+        {
+          "prompt": "Ask a question about a private preference.",
+          "type": "live"
+        },
+        {
+          "prompt": "Ask the one intimate question you have always wanted answered.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ex-007",
+      "conceptId": "ex-007",
+      "title": "The Brutal Question",
+      "stage": "extreme",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Ask a question about attraction.",
+          "type": "text"
+        },
+        {
+          "prompt": "Ask a question about dating history.",
+          "type": "text"
+        },
+        {
+          "prompt": "Ask a question about sexual embarrassment.",
+          "type": "text"
+        },
+        {
+          "prompt": "Ask a question about a private preference.",
+          "type": "text"
+        },
+        {
+          "prompt": "Ask the one intimate question you have always wanted answered.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-ex-008",
+      "conceptId": "ex-008",
+      "title": "Stage Fright",
+      "stage": "extreme",
+      "category": "dare",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Deliver a cheesy chat-up line.",
+          "type": "live"
+        },
+        {
+          "prompt": "Perform a ten-second flirtatious pose.",
+          "type": "live"
+        },
+        {
+          "prompt": "Invent a filthy-minded stage name.",
+          "type": "live"
+        },
+        {
+          "prompt": "Give a 20-second exaggerated seductive monologue.",
+          "type": "live"
+        },
+        {
+          "prompt": "Perform a full 30-second outrageous character introduction.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ex-008",
+      "conceptId": "ex-008",
+      "title": "Stage Fright",
+      "stage": "extreme",
+      "category": "dare",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Deliver a cheesy chat-up line.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Perform a ten-second flirtatious pose.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Invent a filthy-minded stage name.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Give a 20-second exaggerated seductive monologue.",
+          "type": "photo"
+        },
+        {
+          "prompt": "Perform a full 30-second outrageous character introduction.",
+          "type": "photo"
+        }
+      ],
+      "completion": "photo"
+    },
+    {
+      "id": "in-ex-009",
+      "conceptId": "ex-009",
+      "title": "Caught Red-Handed",
+      "stage": "extreme",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Admit a time you were caught flirting.",
+          "type": "live"
+        },
+        {
+          "prompt": "Describe a message someone else saw accidentally.",
+          "type": "live"
+        },
+        {
+          "prompt": "Tell the story of an embarrassing browser-tab incident.",
+          "type": "live"
+        },
+        {
+          "prompt": "Admit a time you were interrupted during a private moment.",
+          "type": "live"
+        },
+        {
+          "prompt": "Recount your most mortifying adult misunderstanding without skipping the awkward details.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ex-009",
+      "conceptId": "ex-009",
+      "title": "Caught Red-Handed",
+      "stage": "extreme",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Admit a time you were caught flirting.",
+          "type": "text"
+        },
+        {
+          "prompt": "Describe a message someone else saw accidentally.",
+          "type": "text"
+        },
+        {
+          "prompt": "Tell the story of an embarrassing browser-tab incident.",
+          "type": "text"
+        },
+        {
+          "prompt": "Admit a time you were interrupted during a private moment.",
+          "type": "text"
+        },
+        {
+          "prompt": "Recount your most mortifying adult misunderstanding without skipping the awkward details.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    },
+    {
+      "id": "in-ex-010",
+      "conceptId": "ex-010",
+      "title": "The Last Confession",
+      "stage": "extreme",
+      "category": "truth",
+      "mode": "in_person",
+      "steps": [
+        {
+          "prompt": "Reveal a secret crush from your past.",
+          "type": "live"
+        },
+        {
+          "prompt": "Admit an embarrassing romantic habit.",
+          "type": "live"
+        },
+        {
+          "prompt": "Describe a sexual question you were afraid to ask.",
+          "type": "live"
+        },
+        {
+          "prompt": "Reveal an intimate insecurity you once hid.",
+          "type": "live"
+        },
+        {
+          "prompt": "Confess the most personal adult secret you are prepared to share in the game.",
+          "type": "live"
+        }
+      ],
+      "completion": "live"
+    },
+    {
+      "id": "re-ex-010",
+      "conceptId": "ex-010",
+      "title": "The Last Confession",
+      "stage": "extreme",
+      "category": "truth",
+      "mode": "remote",
+      "steps": [
+        {
+          "prompt": "Reveal a secret crush from your past.",
+          "type": "text"
+        },
+        {
+          "prompt": "Admit an embarrassing romantic habit.",
+          "type": "text"
+        },
+        {
+          "prompt": "Describe a sexual question you were afraid to ask.",
+          "type": "text"
+        },
+        {
+          "prompt": "Reveal an intimate insecurity you once hid.",
+          "type": "text"
+        },
+        {
+          "prompt": "Confess the most personal adult secret you are prepared to share in the game.",
+          "type": "text"
+        }
+      ],
+      "completion": "text"
+    }
+  ]
+}
