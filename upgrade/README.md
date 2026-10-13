@@ -58,3 +58,9 @@ npm run test:hosted
 Hosted tests guard against any project except the isolated test project and create disposable anonymous accounts/rooms. Expected permission-denied warnings are negative security tests. For an environment with an outbound proxy, exclude loopback or remove proxy variables only from the emulator-test child process; do not remove the external networking configuration from hosted tests. `qa.html` provides the browser layout fixtures.
 
 Existing rooms from the earlier library must stop and restart after both devices reload. The IDs and version check deliberately prevent silent challenge substitution. Previous content remains in Git at `e292c9a0f4ec742630b468d4da6f71ca285b1807`.
+
+## Current manually edited library — 13 October 2026
+
+`challenge-library.json` is now the authoritative editable source, imported byte-for-byte from the owner's `challenge-library-proofread.json`. Edit only this JSON for future wording changes. The earlier packed files in `library-source/` and earlier audit reports describe the previous release and remain for history; they must not overwrite this import. The builder detects `manual-import-validation.json` and validates the current JSON without regenerating it. No wording or gameplay metadata was changed during import.
+
+See `manual-import-validation.json` and `library-validation.json`. The existing content test flags identical step sequences (41 findings); those are preserved per owner instruction. They are editorial duplication, not malformed JSON or broken gameplay. Eight of nine engine/library checks passed; one duplicate-content assertion failed. Previous comprehensive multiplayer results are historical, not a new test claim for this import.

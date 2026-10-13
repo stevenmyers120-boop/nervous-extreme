@@ -84,3 +84,9 @@ Fresh Chromium checks on the published test URL passed:
 `qa-adult-v2.jpg` captures the newly published contact card and phone layouts. No personal answers or intimate media were used. The recorded 12 core/emulator and 3 hosted-client tests remain the comprehensive automated evidence for both multiplayer modes. The HTML-only script-link change was followed by 9 passing engine/library checks; it did not change gameplay logic or the library.
 
 The original root game and production Firebase remain unchanged; root promotion still requires owner approval. Earlier rooms must Stop, both devices must reload, and players must create a fresh room.
+
+## Owner-edited import — 13 October 2026
+
+The owner supplied `challenge-library-proofread.json` and required unchanged wording. It replaced the runtime JSON byte-for-byte. All 1,000 IDs, metadata and five-step shapes are unchanged; only 89 titles and 1,733 prompts differ from the prior release. No coding correction was required. SHA-256 is recorded in `manual-import-validation.json`.
+
+Eight engine/library checks passed; the duplicate-content test failed because the supplied file has 41 repeated five-step sequence findings. They were preserved, as required. The validator's INCOMPLETE label reflects those content findings; no structural errors were found. Earlier semantic audits and comprehensive multiplayer tests above apply to the previous release. The imported JSON is now canonical and protected from legacy source regeneration.

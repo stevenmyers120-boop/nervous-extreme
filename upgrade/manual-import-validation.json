@@ -1,0 +1,22 @@
+{
+  "source": "challenge-library-proofread.json",
+  "sha256": "496f68e632925234cfca4b17daa4cb4bf5ea62d79b587135eed740afd86be310",
+  "wordingChangedByImport": false,
+  "codingCorrections": [],
+  "variants": 1000,
+  "concepts": 500,
+  "steps": 5000,
+  "changedTitles": 89,
+  "changedPrompts": 1733,
+  "gameplayMetadataUnchanged": true,
+  "canonicalSource": "challenge-library.json",
+  "duplicateContentFindings": 41,
+  "checks": {
+    "engineAndLibrary": "8 passed, 1 failed: existing duplicate-content assertion; preserved by owner instruction"
+  },
+  "notes": [
+    "Duplicate wording is an editorial finding, not a JSON or gameplay coding error. It is retained without editing.",
+    "Previous content and source files remain in Git. Current runtime JSON is the canonical manually edited source.",
+    "Reload both devices and start a fresh room."
+  ]
+}
