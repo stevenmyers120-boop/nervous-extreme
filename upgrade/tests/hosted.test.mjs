@@ -15,7 +15,7 @@ function browser(db,uid,saved){
   const dom=new JSDOM(html,{url:'https://test.example/upgrade/',runScripts:'outside-only',pretendToBeVisual:true}),w=dom.window;
   w.testEngine=engine;w.HTMLDialogElement.prototype.showModal=function(){this.open=true;};w.HTMLDialogElement.prototype.close=function(){this.open=false;};
   if(saved)w.sessionStorage.setItem('nervous-upgrade-room',saved);
-  w.fetch=async path=>({ok:true,json:async()=>path==='challenge-library.json'?{challenges:deck}:{enabled:true,config:{projectId:'demo-nervous-upgrade'}}});
+  w.fetch=async path=>({ok:true,json:async()=>path==='challenge-library.json'?{libraryVersion:'adult-v2',challenges:deck}:{enabled:true,config:{projectId:'demo-nervous-upgrade'}}});
   w.firebase={apps:[],initializeApp:()=>{},auth:Object.assign(()=>({currentUser:{uid},setPersistence:async()=>{}}),{Auth:{Persistence:{SESSION:'session'}}}),database:Object.assign(()=>db,{ServerValue:{TIMESTAMP:{'.sv':'timestamp'}}})};
   const append=w.document.head.append.bind(w.document.head);w.document.head.append=node=>{if(node.tagName==='SCRIPT')queueMicrotask(()=>node.onload());else append(node);};
   w.eval(source+'\nwindow.gameTest={read:x=>eval(x),action,stop:()=>{generation++;stops.splice(0).forEach(f=>f());if(db){db.ref(".info/connected").off();db.ref(".info/serverTimeOffset").off();}clearTimeout(expiryTimer);}};');return dom;
@@ -41,6 +41,7 @@ for(const mode of ['in_person','remote'])test('two independent Firebase clients 
     await assertFails(xdb.ref(root+'/guestUid').set(xdb.app.auth().currentUser.uid));await assertFails(xdb.ref(root).remove());
     await assertFails(gdb.ref(root+'/game').set({revision:rev(g)+1,state:state(g),updatedAt:{'.sv':'timestamp'}}));
     get(h,'readyCheck').click();get(g,'readyCheck').click();await until(()=>!get(h,'startGame').disabled,'both ready');get(h,'player0').value='Alex';get(h,'player1').value='Sam';get(h,'surprises').value='off';get(h,'timerSetting').value='15';await click(h,'startGame');await sync();assert.equal(state(g).phase,'playing');if(mode==='remote'){const textCard=deck.find(t=>t.mode==='remote'&&t.stage==='warm_up'&&t.steps.every(v=>v.type==='text'));await force({task:textCard.id,used:[textCard.conceptId],responseType:'text'});}
+    const currentTask=state(h).task;await force({task:mode+'-warm_up-001'});assert.match(get(g,'taskPrompt').textContent,/earlier challenge library/);assert.ok(get(g,'actionButtons').classList.contains('hidden'));assert.equal(get(g,'endGame').disabled,false);await force({task:currentTask});assert.ok(!get(g,'actionButtons').classList.contains('hidden'));
     await assertFails(bad('complete'));await assertFails(bad('submitAnswer',hdb,'wrong actor'));await assertFails(gdb.ref(root+'/guestUid').set(''));assert.equal(get(g,'complete').classList.contains('hidden'),true);
     for(let i=0;i<5;i++){
       if(i===4){await assertFails(bad('complete',hdb));await click(h,'revealFinal');await sync();}
