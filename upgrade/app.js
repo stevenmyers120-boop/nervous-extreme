@@ -3,7 +3,7 @@
 import {base,normalize,transition,unlocked,LABELS} from './engine.js';
 const $=id=>document.getElementById(id),show=(id,on)=>$(id).classList.toggle('hidden',!on),txt=(id,t)=>$(id).textContent=t;
 const KEY='nervous-upgrade-room';
-let DECK=[],db,auth,uid,ref,room='',role=0,other='',offset=0,online=false,peer=false,ready={},s=null,revision=0,pending=false,queue=Promise.resolve(),draftKey='',stops=[],generation=0,connecting=false,local=false,selected='in_person',boot=null,expiryTimer,pendingClose=null,multiplayerEnabled=null;
+let DECK=[],db,auth,uid,ref,room='',role=0,other='',offset=0,online=false,peer=false,ready={},s=null,revision=0,pending=false,queue=Promise.resolve(),draftKey='',stops=[],generation=0,connecting=false,local=false,selected='in_person',boot=null,expiryTimer,pendingClose=null,closeFlight=null,multiplayerEnabled=null;
 const now=()=>Date.now()+offset;
 const actor=()=>local?s.turn:role;
 const c=()=>s&&s.turn===actor();
@@ -46,7 +46,7 @@ async function attach(code,r){
   // Guest membership changes must also recompute presence.
   watch(ref.child('guestUid'),'value',()=>{peer=!!present[other];render();});
   watch(ref.child('ready'),'value',v=>{ready=v.val()||{};$('readyCheck').checked=!!ready[uid];render();});
-  watch(ref.child('game'),'value',v=>{const g=v.val();if(g){s=normalize(g.state);revision=g.revision;lobby();render();}});
+  watch(ref.child('game'),'value',v=>{const g=v.val();if(g){s=normalize(g.state);revision=g.revision;lobby();render();}else if(s){cleanup();show('home',false);show('connect',true);txt('connectStatus','Room ended and its gameplay data was deleted.');}});
   if(role===0){if(!meta.game)await ref.child('game').set({revision:1,state:base(selected),updatedAt:firebase.database.ServerValue.TIMESTAMP});watch(ref.child('actions'),'child_added',v=>{const gen=generation;queue=queue.then(()=>gen===generation?process(v):undefined).catch(err);});}
   lobby();await presence();render();
 }
@@ -96,10 +96,14 @@ function timer(){if(!s)return;show('timerDisplay',s.timerSeconds>0&&s.phase==='p
 async function end(){
   if(local){cleanup();return;}
   const ending=ref;if(!ending){cleanup();return;}
-  if(!online){const saved={room,role,uid,endRequested:true};pendingClose=ending;cleanup();sessionStorage.setItem(KEY,JSON.stringify(saved));show('home',false);show('connect',true);txt('connectStatus','Game stopped on this device. Reconnect to delete the room for both players.');return;}
-  try{await ending.remove();cleanup();txt('connectStatus','Room ended and its gameplay data was deleted.');}catch(e){err(e);}
+  const saved={room,role,uid,endRequested:true};pendingClose=ending;cleanup();sessionStorage.setItem(KEY,JSON.stringify(saved));show('home',false);show('connect',true);txt('connectStatus','Game stopped on this device. Room deletion is queued; reconnect to finish ending it for both players.');void flushClose();
 }
-async function flushClose(){const ending=pendingClose;if(!ending)return;try{await ending.remove();pendingClose=null;sessionStorage.removeItem(KEY);txt('connectStatus','Room ended and its gameplay data was deleted.');}catch(e){txt('connectStatus','Stopped locally. Room deletion still needs a connection and valid staging access.');}}
+function flushClose(){
+  if(closeFlight)return closeFlight;const ending=pendingClose;if(!ending)return Promise.resolve();
+  // Queue the write even while offline. Waiting for .info/connected before
+  // writing can leave a client with no active room listeners idle on reconnect.
+  closeFlight=(async()=>{try{await ending.remove();if(pendingClose===ending)pendingClose=null;const saved=JSON.parse(sessionStorage.getItem(KEY)||'null');if(saved?.endRequested&&saved.room===ending.key)sessionStorage.removeItem(KEY);txt('connectStatus','Room ended and its gameplay data was deleted.');}catch(e){txt('connectStatus','Stopped locally. Room deletion still needs a connection and valid staging access.');}finally{closeFlight=null;}})();return closeFlight;
+}
 async function leave(){if(local)return cleanup();if(role===0||s&&s.phase!=='setup')return end();try{await ref.child('presence/'+uid).set(false);await ref.child('ready/'+uid).set(false);await ref.child('guestUid').set('');cleanup();}catch(e){err(e);}}
 function connect(mode){selected=mode;show('home',false);show('connect',true);txt('selectedMode',mode==='remote'?'MULTIPLE DEVICES · REMOTE':'MULTIPLE DEVICES · IN PERSON');}
 $('single').onclick=async()=>{try{await libraryReady;local=true;role=0;s=base('in_person');lobby();render();}catch(e){show('home',false);show('connect',true);err(e);}};

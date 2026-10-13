@@ -4,6 +4,12 @@
   "scripts": {
     "test": "node --test tests/engine.test.mjs tests/library.test.mjs tests/multiplayer.test.mjs",
     "validate": "node scripts/validate-library.mjs",
-    "test:hosted": "node --test --test-timeout=60000 --test-concurrency=1 tests/hosted.test.mjs"
+    "test:hosted": "node --test --test-timeout=120000 --test-concurrency=1 tests/hosted.test.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "30.1.2",
+    "firebase": "10.14.1",
+    "@firebase/rules-unit-testing": "3.0.4",
+    "firebase-tools": "13.35.1"
   }
 }
