@@ -33,11 +33,12 @@ state['used']['$i']['.validate'] = "newData.isString() && newData.val().length >
 state['responseType']['.validate'] = "newData.val() === 'live' || newData.val() === 'text' || newData.val() === 'photo' || newData.val() === 'video'"
 state['results']['$i']['winner']['.validate'] = "newData.isNumber() && newData.val() >= -1 && newData.val() <= 1 && newData.val() % 1 === 0"
 action = room['actions']['$action']
-action['id']['.validate'] = action['id']['.validate'].replace("newData.val() === 'nervous'", "newData.val() === 'nervous' || newData.val() === 'skip'")
+action['id']['.validate'] += " || newData.val() === 'skip'"
 action['.write'] = action['.write'].replace("newData.child('id').val() === 'nervous'", "newData.child('id').val() === 'nervous' || newData.child('id').val() === 'skip'")
 action['.write'] = action['.write'].replace(root + ".child('game').child('state').child('submitted').val() === true", "(" + root + ".child('game').child('state').child('submitted').val() === true || " + root + ".child('game').child('state').child('responseType').val() === 'live')")
 action['.write'] = action['.write'].replace(root + ".child('game').child('state').child('phase').val() === 'winner'", "(" + root + ".child('game').child('state').child('phase').val() === 'winner' || " + root + ".child('game').child('state').child('phase').val() === 'exhausted')")
 original['rules']['upgradeRooms'] = upgrade
 (directory / 'staging.rules.json').write_text(json.dumps(original, indent=2) + '\n')
+(directory / 'staging-only.rules.json').write_text(json.dumps({'rules': {'.read': False, '.write': False, 'upgradeRooms': upgrade}}, indent=2) + '\n')
 configuration = {'database': {'rules': 'staging.rules.json'}, 'emulators': {'database': {'port': 9001}, 'ui': {'enabled': False}}, 'singleProjectMode': True}
 (directory / 'firebase.staging.json').write_text(json.dumps(configuration, indent=2) + '\n')
