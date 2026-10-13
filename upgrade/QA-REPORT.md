@@ -92,3 +92,7 @@ The owner supplied `challenge-library-proofread.json` and required unchanged wor
 Eight engine/library checks passed; the duplicate-content test failed because the supplied file has 41 repeated five-step sequence findings. They were preserved, as required. The validator's INCOMPLETE label reflects those content findings; no structural errors were found. Earlier semantic audits and comprehensive multiplayer tests above apply to the previous release. The imported JSON is now canonical and protected from legacy source regeneration.
 
 Published verification: the hosted library was downloaded and its SHA-256 matched the supplied attachment exactly (`496f68e632925234cfca4b17daa4cb4bf5ea62d79b587135eed740afd86be310`). A fresh Chromium Single Phone session rendered an imported prompt; Stop returned to the opening screen. The no-regeneration safeguard is saved in Git. `qa-manual-import.jpg` records the saved commit and unchanged original root files. No multiplayer logic or Firebase rules were changed during this import.
+
+## Further owner-edited import — 13 October 2026
+
+`challenge-library-PRODUCTION.json` replaces the earlier proofread import byte-for-byte. All 1,000 IDs, stages, modes, kinds, evidence types and five-step metadata match the previous library. No coding correction or wording edit was required. Forty-one exact extra repeated step sequences remain in the supplied file and are retained. Gameplay code and Firebase configuration are unchanged. The SHA-256 is recorded in `manual-import-validation.json`; earlier test results remain historical.
