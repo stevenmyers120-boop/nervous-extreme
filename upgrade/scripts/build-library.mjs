@@ -1,4 +1,12 @@
 import fs from 'node:fs';
+// Imported wording is authoritative: never regenerate it from the earlier packed source.
+if(fs.existsSync(new URL('../manual-import-validation.json',import.meta.url))){
+  const bytes=fs.readFileSync(new URL('../challenge-library.json',import.meta.url));
+  const library=JSON.parse(bytes);
+  if(library.challenges.length!==1000||new Set(library.challenges.map(c=>c.id)).size!==1000||library.challenges.some(c=>c.steps.length!==5))throw Error('Invalid manually edited library structure');
+  console.log('Manual library is canonical. Validated 1,000 variants; preserved every byte without regeneration.');
+  process.exit(0);
+}
 const root=new URL('../',import.meta.url),challenges=[];
 const stages=[['warm_up',40],['getting_personal',160],['extreme',300]];
 for(const [stage,expected] of stages){
