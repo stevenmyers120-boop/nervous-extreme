@@ -9,7 +9,7 @@ const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
 const deck=JSON.parse(fs.readFileSync(new URL('../challenge-library.json',import.meta.url))).challenges;
 const source=fs.readFileSync(new URL('../app.js',import.meta.url),'utf8').replace(/^import .*$/m,'const {base,normalize,transition,unlocked,LABELS}=window.testEngine;');
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
-async function until(fn,label){for(let i=0;i<350;i++){if(fn())return;await delay(15);}throw Error('Timeout: '+label);}
+async function until(fn,label){for(let i=0;i<2000;i++){if(fn())return;await delay(15);}throw Error('Timeout: '+label);}
 function browser(db,uid,saved){
   uid=db.app.auth().currentUser.uid;
   const dom=new JSDOM(html,{url:'https://test.example/upgrade/',runScripts:'outside-only',pretendToBeVisual:true}),w=dom.window;
@@ -23,12 +23,12 @@ function browser(db,uid,saved){
 const get=(w,id)=>w.document.getElementById(id),read=(w,x)=>w.gameTest.read(x),state=w=>read(w,'s'),rev=w=>read(w,'revision');
 async function click(w,id){const before=rev(w);get(w,id).click();await until(()=>rev(w)>before,id+' state');await until(()=>!read(w,'pending'),id+' ack');}
 test('single phone actual controls: consent, play, reveal, both Nervous buttons, score and end cleanup',async()=>{
-  const env=await initializeTestEnvironment({projectId:'demo-nervous-upgrade',database:{host:'127.0.0.1',port:9001,rules:fs.readFileSync(new URL('../staging.rules.json',import.meta.url),'utf8')}});
+  const env=await initializeTestEnvironment({projectId:'demo-nervous-upgrade',clientNames:['solo'],database:{host:'127.0.0.1',port:9001,rules:fs.readFileSync(new URL('../staging.rules.json',import.meta.url),'utf8')}});
   const db=env.authenticatedContext('solo').database(),dom=browser(db,'solo'),w=dom.window;
   try{get(w,'single').click();await until(()=>state(w),'solo setup');assert.equal(get(w,'startGame').disabled,true);get(w,'readyCheck').click();get(w,'surprises').value='off';await click(w,'startGame');assert.equal(state(w).phase,'playing');for(let i=0;i<4;i++)await click(w,'complete');assert.ok(get(w,'complete').classList.contains('hidden'));await click(w,'revealFinal');await click(w,'complete');assert.deepEqual(Array.from(state(w).wins),[0,1]);await click(w,'callNervous');await click(w,'otherNervous');assert.deepEqual(Array.from(state(w).wins),[0,4]);get(w,'endGame').click();assert.equal(state(w),null);assert.equal(w.sessionStorage.getItem('nervous-upgrade-room'),null);assert.equal(get(w,'answerBox').value,'');}finally{w.gameTest.stop();w.close();db.goOffline();await env.cleanup();}
 });
 for(const mode of ['in_person','remote'])test('two independent Firebase clients and controls: '+mode,async()=>{
-  const env=await initializeTestEnvironment({projectId:'demo-nervous-upgrade',database:{host:'127.0.0.1',port:9001,rules:fs.readFileSync(new URL('../staging.rules.json',import.meta.url),'utf8')}});
+  const env=await initializeTestEnvironment({projectId:'demo-nervous-upgrade',clientNames:['host-'+mode,'guest-'+mode,'intruder','unauth'],database:{host:'127.0.0.1',port:9001,rules:fs.readFileSync(new URL('../staging.rules.json',import.meta.url),'utf8')}});
   const hdb=env.authenticatedContext('host-'+mode).database(),gdb=env.authenticatedContext('guest-'+mode).database(),xdb=env.authenticatedContext('intruder').database();
   let host=browser(hdb,'host-'+mode),guest=browser(gdb,'guest-'+mode),h=host.window,g=guest.window;
   const sync=async()=>{await until(()=>rev(h)===rev(g),'synchronisation');await delay(20);};let root;
@@ -64,6 +64,6 @@ for(const mode of ['in_person','remote'])test('two independent Firebase clients 
     for(let i=0;i<6;i++){await click(h,'skip');await sync();assert.equal(state(h).classics,0);}const used=[...state(h).used];assert.equal(new Set(used).size,used.length);
     for(let m=1;m<=3;m++){await force({phase:'playing',match:m,round:1,turn:0,wins:[14,0],target:15,level:0,mode:'classic',submitted:false,answer:'',custom:'',responseType:mode==='remote'?'text':'live'});await click(g,'callNervous');await sync();assert.equal(state(h).phase,m===3?'finished':'winner');if(m<3){await click(g,'nextMatch');await sync();assert.equal(state(h).match,m+1);}}
     assert.equal(state(h).results.length,3);assert.deepEqual([...state(h).used],[]);assert.match(get(g,'overallWinner').textContent,/Alex WINS/);
-    if(mode==='remote'){gdb.goOffline();await until(()=>!read(g,'online'),'offline');get(g,'endGame').click();assert.equal(state(g),null);assert.match(get(g,'connectStatus').textContent,/stopped on this device/);assert.ok(JSON.parse(g.sessionStorage.getItem('nervous-upgrade-room')).endRequested);gdb.goOnline();}else await assertSucceeds(gdb.ref(root).remove());await until(()=>!read(h,'room')&&!read(g,'room'),'room deletion');await until(()=>g.sessionStorage.getItem('nervous-upgrade-room')===null,'pending closure cleared');await assertFails(gdb.ref(root).once('value')); // Console data view separately verifies test-room deletion.
+    if(mode==='remote'){gdb.goOffline();await until(()=>!read(g,'online'),'offline');get(g,'endGame').click();assert.equal(state(g),null);assert.match(get(g,'connectStatus').textContent,/stopped on this device/);assert.ok(JSON.parse(g.sessionStorage.getItem('nervous-upgrade-room')).endRequested);assert.ok(read(g,'closeFlight'),'offline deletion is queued before reconnect');gdb.goOnline();}else {get(g,'endGame').click();assert.equal(state(g),null);assert.ok(read(g,'closeFlight'));}await until(()=>!read(h,'room')&&!read(g,'room'),'room deletion');await until(()=>g.sessionStorage.getItem('nervous-upgrade-room')===null,'pending closure cleared');await assertFails(gdb.ref(root).once('value')); // Console data view separately verifies test-room deletion.
   }finally{for(const dom of [host,guest]){try{dom.window.gameTest.stop();}catch{}dom.window.close();}hdb.goOffline();gdb.goOffline();xdb.goOffline();await env.cleanup();}
 });

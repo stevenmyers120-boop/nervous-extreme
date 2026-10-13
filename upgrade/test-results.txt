@@ -2,35 +2,35 @@
 i  emulators: Starting emulators: database
 i  emulators: Detected demo project ID "demo-nervous-upgrade", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail.
 i  database: Database Emulator logging to database-debug.log
-i  Running script: env -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY -u http_proxy -u https_proxy -u all_proxy node --test --test-timeout=20000 --test-concurrency=1 tests/*.test.mjs
-✔ original working files and production Firebase rules remain byte-for-byte preserved (26.721946ms)
-✔ single phone: five steps, final reveal, scoring, both Nervous directions, decline and fresh pool (2.175397ms)
-✔ remote text: drafts absent, only challenger submits, review, final step and clearing (0.341746ms)
-✔ remote custom truth uses text; photo/video custom dares require Snapchat marker (2.691821ms)
-✔ stage-only selection, no repeat on exhaustion, three matches and cleanup (1.823256ms)
-✔ reject malformed settings and unsupported actions (0.462695ms)
-✔ entire stage pools can be exhausted without repeats or an invalid custom-round counter (95.680067ms)
-✔ full authored library: counts, unique variants, complete metadata, five escalating steps and remote evidence (19.988513ms)
-✔ single phone actual controls: consent, play, reveal, both Nervous buttons, score and end cleanup (399.698345ms)
-[2026-10-13T12:18:13.977Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/3XVBC5/guestUid failed: permission_denied 
-[2026-10-13T12:18:13.983Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/3XVBC5 failed: permission_denied 
-[2026-10-13T12:18:13.991Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/3XVBC5/game failed: permission_denied 
-[2026-10-13T12:18:14.068Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/3XVBC5/actions/-P3pBjDg2CL1N0VG_LNR failed: permission_denied 
-[2026-10-13T12:18:14.076Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/3XVBC5/actions/-P3pBjCUTTeISBa3GNon failed: permission_denied 
-[2026-10-13T12:18:14.084Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/3XVBC5/guestUid failed: permission_denied 
-[2026-10-13T12:18:14.310Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/3XVBC5/actions/-P3pBjG6J7wa-Hua3gyr failed: permission_denied 
-[2026-10-13T12:18:14.434Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/3XVBC5/actions/-P3pBjI46ZnuJG93gZRr failed: permission_denied 
-✔ two independent Firebase clients and controls: in_person (2257.162803ms)
-[2026-10-13T12:18:15.669Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/8QJ8X9/guestUid failed: permission_denied 
-[2026-10-13T12:18:15.672Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/8QJ8X9 failed: permission_denied 
-[2026-10-13T12:18:15.675Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/8QJ8X9/game failed: permission_denied 
-[2026-10-13T12:18:15.764Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/8QJ8X9/actions/-P3pBjdEVPqdr5eBn7Jl failed: permission_denied 
-[2026-10-13T12:18:15.768Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/8QJ8X9/actions/-P3pBjdJEdlg2_N5AfeK failed: permission_denied 
-[2026-10-13T12:18:15.771Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/8QJ8X9/guestUid failed: permission_denied 
-[2026-10-13T12:18:16.230Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/8QJ8X9/actions/-P3pBjkWMXkVfp5hvpNN failed: permission_denied 
-[2026-10-13T12:18:16.366Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/8QJ8X9/actions/-P3pBjmchR7JkSKsEbup failed: permission_denied 
-[2026-10-13T12:18:16.401Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/8QJ8X9/actions/-P3pBjnB-WK68-OHgRNu failed: permission_denied 
-✔ two independent Firebase clients and controls: remote (2113.583243ms)
+i  Running script: env -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY -u http_proxy -u https_proxy -u all_proxy node --test --test-timeout=20000 --test-concurrency=1 tests/engine.test.mjs tests/library.test.mjs tests/multiplayer.test.mjs
+✔ original working files and production Firebase rules remain byte-for-byte preserved (19.524593ms)
+✔ single phone: five steps, final reveal, scoring, both Nervous directions, decline and fresh pool (1.910926ms)
+✔ remote text: drafts absent, only challenger submits, review, final step and clearing (0.345191ms)
+✔ remote custom truth uses text; photo/video custom dares require Snapchat marker (1.934811ms)
+✔ stage-only selection, no repeat on exhaustion, three matches and cleanup (1.838629ms)
+✔ reject malformed settings and unsupported actions (0.448644ms)
+✔ entire stage pools can be exhausted without repeats or an invalid custom-round counter (93.578734ms)
+✔ full authored library: counts, unique variants, complete metadata, five escalating steps and remote evidence (12.014857ms)
+✔ single phone actual controls: consent, play, reveal, both Nervous buttons, score and end cleanup (254.349158ms)
+[2026-10-13T12:43:10.581Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/PWR9PY/guestUid failed: permission_denied 
+[2026-10-13T12:43:10.586Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/PWR9PY failed: permission_denied 
+[2026-10-13T12:43:10.592Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/PWR9PY/game failed: permission_denied 
+[2026-10-13T12:43:10.671Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/PWR9PY/actions/-P3pHRb7BeOmb4v5GdS9 failed: permission_denied 
+[2026-10-13T12:43:10.677Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/PWR9PY/actions/-P3pHRaAT4d11zKIEXpu failed: permission_denied 
+[2026-10-13T12:43:10.684Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/PWR9PY/guestUid failed: permission_denied 
+[2026-10-13T12:43:10.872Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/PWR9PY/actions/-P3pHRdCSZ7Ky6p7jo51 failed: permission_denied 
+[2026-10-13T12:43:10.956Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/PWR9PY/actions/-P3pHReUbQQ4tZzQViOu failed: permission_denied 
+✔ two independent Firebase clients and controls: in_person (1956.572678ms)
+[2026-10-13T12:43:12.098Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/Q7MQF6/guestUid failed: permission_denied 
+[2026-10-13T12:43:12.100Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/Q7MQF6 failed: permission_denied 
+[2026-10-13T12:43:12.103Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/Q7MQF6/game failed: permission_denied 
+[2026-10-13T12:43:12.207Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/Q7MQF6/actions/-P3pHRz9kYiMCaSpOFKd failed: permission_denied 
+[2026-10-13T12:43:12.212Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/Q7MQF6/actions/-P3pHRzDNbMq9m7935M3 failed: permission_denied 
+[2026-10-13T12:43:12.214Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/Q7MQF6/guestUid failed: permission_denied 
+[2026-10-13T12:43:12.668Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/Q7MQF6/actions/-P3pHS5M_74MpiSVjANl failed: permission_denied 
+[2026-10-13T12:43:12.803Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/Q7MQF6/actions/-P3pHS7SWe7TNS3_dr0h failed: permission_denied 
+[2026-10-13T12:43:12.837Z]  @firebase/database: FIREBASE WARNING: set at /upgradeRooms/Q7MQF6/actions/-P3pHS8-OwTbTTT8ZEDA failed: permission_denied 
+✔ two independent Firebase clients and controls: remote (2167.550317ms)
 ℹ tests 11
 ℹ suites 0
 ℹ pass 11
@@ -38,7 +38,7 @@ i  Running script: env -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY -u http_proxy -
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 6024.939726
+ℹ duration_ms 5295.890567
 ✔  Script exited successfully (code 0)
 i  emulators: Shutting down emulators.
 i  database: Stopping Database Emulator
