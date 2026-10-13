@@ -1,28 +1,21 @@
 {
-  "status": "INCOMPLETE",
-  "variants": 60,
-  "concepts": 30,
-  "steps": 300,
+  "status": "STRUCTURE PASSED",
+  "variants": 1000,
+  "concepts": 500,
+  "steps": 5000,
   "counts": {
     "in_person": {
-      "warm_up": 10,
-      "getting_personal": 10,
-      "extreme": 10
+      "warm_up": 40,
+      "getting_personal": 160,
+      "extreme": 300
     },
     "remote": {
-      "warm_up": 10,
-      "getting_personal": 10,
-      "extreme": 10
+      "warm_up": 40,
+      "getting_personal": 160,
+      "extreme": 300
     }
   },
-  "errors": [
-    "in_person warm_up: 10/40",
-    "in_person getting_personal: 10/160",
-    "in_person extreme: 10/300",
-    "remote warm_up: 10/40",
-    "remote getting_personal: 10/160",
-    "remote extreme: 10/300"
-  ],
+  "errors": [],
   "nearDuplicateCandidates": [],
   "limitations": [
     "Token similarity is a screening aid, not a semantic diversity or escalation review.",

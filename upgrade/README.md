@@ -1,15 +1,15 @@
 # Nervous Extreme — existing-game upgrade branch
 
-This is an **incomplete engineering checkpoint**, not the complete approved replacement. The live original remains unchanged. Baseline: `7dec9af9363bec84d79db27226469adbbff5e245`. GitHub backup branch: `backup/pre-upgrade-2026-10-13`. Development branch: `upgrade/unified-2026-10-13`.
+This is the **isolated upgrade awaiting hosted multiplayer verification and deployment approval**. The live original remains unchanged. Baseline: `7dec9af9363bec84d79db27226469adbbff5e245`. GitHub backup branch: `backup/pre-upgrade-2026-10-13`. Development branch: `upgrade/unified-2026-10-13`.
 
 The room protocol is adapted from the working `distance.js`: anonymous membership, atomic guest claim, presence, ready checks, host-processed revision-tagged actions, server-adjusted clocks and session resume. A shared engine supplies all three playing modes through one `upgrade/index.html` entry point. Scoring retains the original 1-point challenger Nervous / 2-point conductor Nervous / 1-point full challenge rules and three-match championship. Only conductor controls can complete; remote completion also requires a submitted response. Decline gives no points; Stop is available even while the peer is absent. Offline Stop ends the local screen and defers room deletion until reconnect.
 
-## Incomplete work
+## Library and remaining verification
 
-- The included earlier non-graphic starter deck is **30 concepts / 60 variants / 300 steps**, not 500 / 1,000 / 5,000. It has 10 cards per stage per mode, rather than 40 / 160 / 300. `scripts/validate-library.mjs` deliberately fails the required counts. Do not describe this checkpoint as a full game upgrade.
+- The completed non-graphic library contains **500 authored concepts / 1,000 variants / 5,000 steps**, split 40 Warm-Up / 160 Getting Personal / 300 Extreme per mode. The editable source files are in `library-source/`; `scripts/build-library.mjs` creates JSON, and `scripts/validate-library.mjs` verifies its structure and screens similarity. Mode-specific physical adaptations are authored alongside their in-person steps.
 - No remote staging Firebase project is configured. `firebase-config.json` disables network multiplayer and refuses the production project ID. The mode screens are implemented, but room creation on a hosted copy requires separate staging configuration.
-- No deployed test URL or browser/mobile visual QA yet. JSDOM verifies actual control interactions, not browser layout or real phone behavior.
-- The requested explicit sexual dares are not generated. A full new library would need a non-graphic scope agreement.
+- A separate owner-private frontend test Site is being prepared. Hosted multiplayer is explicitly unavailable until staging Firebase is configured. No browser/mobile visual QA yet: JSDOM verifies actual control interactions, not browser layout or real phone behavior.
+- The owner approved the **provocative, non-graphic adult content scope on 13 October 2026**. No intimate exposure, explicit sexual instructions, dangerous tasks or third-party contact are required.
 - Abandoned room expiry revokes access but does not erase records. A scheduled server cleanup job is required for unattended deletion. Explicit Stop deletes the entire room.
 
 ## Run locally
@@ -31,6 +31,7 @@ Install `jsdom`, `firebase@10.14.1`, `@firebase/rules-unit-testing@3.0.4` and `f
 ```sh
 node --test tests/engine.test.mjs
 firebase emulators:exec --only database --project demo-nervous-upgrade --config firebase.staging.json 'node --test --test-concurrency=1 tests/*.test.mjs'
+node scripts/build-library.mjs
 node scripts/validate-library.mjs
 ```
 

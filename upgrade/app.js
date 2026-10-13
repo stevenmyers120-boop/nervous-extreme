@@ -3,12 +3,14 @@
 import {base,normalize,transition,unlocked,LABELS} from './engine.js';
 const $=id=>document.getElementById(id),show=(id,on)=>$(id).classList.toggle('hidden',!on),txt=(id,t)=>$(id).textContent=t;
 const KEY='nervous-upgrade-room';
-let DECK=[],db,auth,uid,ref,room='',role=0,other='',offset=0,online=false,peer=false,ready={},s=null,revision=0,pending=false,queue=Promise.resolve(),draftKey='',stops=[],generation=0,connecting=false,local=false,selected='in_person',boot=null,expiryTimer,pendingClose=null;
+let DECK=[],db,auth,uid,ref,room='',role=0,other='',offset=0,online=false,peer=false,ready={},s=null,revision=0,pending=false,queue=Promise.resolve(),draftKey='',stops=[],generation=0,connecting=false,local=false,selected='in_person',boot=null,expiryTimer,pendingClose=null,multiplayerEnabled=null;
 const now=()=>Date.now()+offset;
 const actor=()=>local?s.turn:role;
 const c=()=>s&&s.turn===actor();
 const libraryReady=fetch('challenge-library.json').then(r=>{if(!r.ok)throw Error('Challenge library could not load.');return r.json();}).then(d=>{DECK=d.challenges;return DECK;});
 libraryReady.catch(e=>txt('connectStatus',e.message));
+const settingsReady=fetch('firebase-config.json').then(r=>{if(!r.ok)throw Error('Staging configuration could not load.');return r.json();}).then(settings=>{multiplayerEnabled=!!(settings.enabled&&settings.config);if(!multiplayerEnabled)txt('connectStatus',settings.notice||'Multiplayer staging setup pending. Single Phone is ready.');busy(connecting);return settings;});
+settingsReady.catch(e=>{multiplayerEnabled=false;busy(false);txt('connectStatus',e.message);});
 function err(e){pending=false;const m=e.message||String(e);txt(s&&s.phase!=='setup'?'gameError':room||local?'lobbyError':'connectStatus',m.includes('permission')||m.includes('PERMISSION')?'This room is unavailable or the staging Firebase rules are not installed.':m);render();}
 function watch(r,event,fn){const gen=generation;const wrapped=v=>{if(gen===generation)fn(v);};r.on(event,wrapped,e=>{if(gen!==generation)return;if(room&&(e.code==='PERMISSION_DENIED'||now()>=expiresAt)){cleanup();txt('connectStatus','Room ended, expired, or access was revoked.');show('home',false);show('connect',true);}else err(e);});stops.push(()=>r.off(event,wrapped));}
 let expiresAt=0;
@@ -21,7 +23,7 @@ function cleanup(){
 async function firebaseBoot(){
   if(boot)return boot;
   boot=(async()=>{
-    await libraryReady;const r=await fetch('firebase-config.json');if(!r.ok)throw Error('Staging configuration could not load.');const settings=await r.json();
+    await libraryReady;const settings=await settingsReady;
     if(!settings.enabled||!settings.config)throw Error(settings.notice||'Multiplayer staging is not configured. Single Phone is available.');
     if(settings.config.projectId==='nervous-extreme')throw Error('Upgrade tests must use a separate staging Firebase project.');
     // SDK loading is lazy: single-phone play remains independent of Firebase.
@@ -48,7 +50,7 @@ async function attach(code,r){
   if(role===0){if(!meta.game)await ref.child('game').set({revision:1,state:base(selected),updatedAt:firebase.database.ServerValue.TIMESTAMP});watch(ref.child('actions'),'child_added',v=>{const gen=generation;queue=queue.then(()=>gen===generation?process(v):undefined).catch(err);});}
   lobby();await presence();render();
 }
-function busy(b){connecting=b;for(const id of ['createRoom','joinRoom','single','together','apart'])$(id).disabled=b;}
+function busy(b){connecting=b;for(const id of ['createRoom','joinRoom'])$(id).disabled=b||multiplayerEnabled===false;for(const id of ['single','together','apart'])$(id).disabled=b;}
 async function create(){if(connecting||room)return;busy(true);try{await firebaseBoot();let code;for(let i=0;i<5;i++){const a=new Uint8Array(6);crypto.getRandomValues(a);code=Array.from(a,n=>'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[n%32]).join('');try{await db.ref('upgradeRooms/'+code).set({hostUid:uid,guestUid:'',createdAt:firebase.database.ServerValue.TIMESTAMP,expiresAt:now()+14340000});break;}catch(e){if(i===4||!String(e.code).includes('PERMISSION'))throw e;}}await attach(code,0);}catch(e){err(e);}finally{busy(false);}}
 async function join(){if(connecting||room)return;busy(true);try{const code=$('roomCode').value.trim().toUpperCase();if(!/^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{6}$/.test(code))throw Error('Enter a valid six-character room code.');await firebaseBoot();await db.ref('upgradeRooms/'+code+'/guestUid').set(uid);await attach(code,1);}catch(e){err(e);}finally{busy(false);}}
 async function process(snapshot){

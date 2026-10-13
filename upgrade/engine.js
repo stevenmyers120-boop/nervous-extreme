@@ -25,7 +25,8 @@ export function transition(state,a,actor,deck,now=Date.now(),pick=randomIndex){
   const finish=(winner,points)=>{
     n.wins[winner]+=points;reset();n.timerUntil=0;
     if(n.wins[winner]>=n.target){n.results.push({match:n.match,winner,scores:[...n.wins]});n.phase=n.match===3?'finished':'winner';n.custom='';n.task='';if(n.phase==='finished')n.used=[];return;}
-    if(n.mode==='classic')n.classics++;
+    if(n.surprise==='off')n.classics=0;
+    else if(n.mode==='classic')n.classics++;
     n.round++;n.turn=(n.round-1)%2;n.level=0;n.custom='';
     if(n.surprise!=='off'&&n.classics>=n.nextSurprise){n.mode=n.surprise==='random'?(pick(2)?'dare':'truth'):n.surprise;n.classics=0;n.nextSurprise=3+pick(2);n.responseType=n.playingMode==='remote'?(n.mode==='truth'?'text':'photo'):'live';}
     else{n.mode='classic';choose();}
