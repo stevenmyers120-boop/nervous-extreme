@@ -42,7 +42,7 @@ The new content checks verify all 30 terms, a contact pool of at least 100, remo
 | Decline and immediate local Stop; peer room closure | Passed |
 | Firebase data view after completed QA runs | Test records removed |
 
-The full browser mechanics checks below were performed on the preceding working release; a fresh adult-v2 browser check is recorded in the release checkpoint. The Snapchat evidence check uses a synthetic test acknowledgement, not a real media transfer. No player data or intimate media was used in testing.
+The full browser mechanics table above was performed on the preceding working release. Fresh adult-v2 checks are recorded below. The Snapchat evidence check uses a synthetic test acknowledgement, not a real media transfer. No player data or intimate media was used in testing.
 
 ## Responsive checks
 
@@ -69,3 +69,18 @@ Screens were visually inspected for hierarchy, readable prompts and accessible r
 ## Deployment preservation
 
 Only the new `upgrade/` test directory has been added to GitHub Pages. Root production game files and Firebase rules/configuration remain byte-identical to original commit `7dec9af9363bec84d79db27226469adbbff5e245`. That commit is retained on `backup/pre-upgrade-2026-10-13`. The original main website has not been replaced. Approval is required before promotion to the root entry point.
+
+## Adult-v2 published release checkpoint — 13 October 2026
+
+Content release PR #4 was merged; the script link was then versioned as `app.js?v=adult-v2` so earlier cached scripts are not reused. Public `challenge-library.json`, `app.js` and `index.html` were retrieved and compared byte-for-byte with the tested local files; all matched. The hosted library reports `adult-v2`.
+
+Fresh Chromium checks on the published test URL passed:
+
+- Single Phone rendered WAIST INVITATION from the replacement library; all five steps, conductor final reveal, +1 challenger score and role rotation worked. Stop returned to the opening screen.
+- Remote room creation and independent second-tab joining worked. The joining player initially chose In Person and inherited the host's Remote mode. Both displayed FOREHEAD PAUSE with its remote text adaptation.
+- A synthetic text answer was shared, challenger Complete was hidden, conductor Complete advanced both sessions to the same next prompt, and Stop closed the peer's room.
+- The 360-pixel phone fixture rendered THE FIRST HUG through final reveal. Body content/scroll widths matched at 360, 390, 414 and 725 pixels (the landscape fixture has a native scrollbar). No horizontal overflow was observed. Only the small phone fixture was newly exercised through the full five-step flow; other sizes were inspected at the opening screen.
+
+`qa-adult-v2.jpg` captures the newly published contact card and phone layouts. No personal answers or intimate media were used. The recorded 12 core/emulator and 3 hosted-client tests remain the comprehensive automated evidence for both multiplayer modes. The HTML-only script-link change was followed by 9 passing engine/library checks; it did not change gameplay logic or the library.
+
+The original root game and production Firebase remain unchanged; root promotion still requires owner approval. Earlier rooms must Stop, both devices must reload, and players must create a fresh room.

@@ -40,7 +40,7 @@ See `QA-REPORT.md`, `CONTENT-REVIEW.md`, `test-results.txt` and `hosted-test-res
 
 - 12 engine/library/actual-control emulator tests passed, including adult-v2 content coverage and old-room compatibility.
 - 3 tests with actual anonymous accounts and independent connections to hosted staging Firebase passed.
-- Chromium browser checks passed for joining, both modes, conductor rotation, scoring, text, custom truths/dares, final-step reveal, resume and Stop.
+- Comprehensive Chromium mechanics checks passed on the preceding release. Fresh adult-v2 checks passed for Single Phone five-step completion/scoring, remote joining and mode inheritance, shared text, conductor permissions, synchronisation and Stop; see the QA release checkpoint.
 - Four phone-sized iframe viewports were inspected and exercised: 360×740, 390×844, 414×896, 740×360. No horizontal content overflow; setup, completion, Decline and Stop worked.
 
 Physical Android/iOS devices and Safari were not available. Snapchat transmission itself was not automated; the game's instructions and evidence marker were verified. Room expiry revokes access after four hours but does not delete unattended abandoned records; a scheduled server cleanup service would be required for that. Explicit Stop deletes the entire room. Completed games clear text and selection history.
