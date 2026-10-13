@@ -1,1 +1,9 @@
-{"private":true,"type":"module","scripts":{"test":"node --test tests/*.test.mjs","validate":"node scripts/validate-library.mjs"}}
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/engine.test.mjs tests/library.test.mjs tests/multiplayer.test.mjs",
+    "validate": "node scripts/validate-library.mjs",
+    "test:hosted": "node --test --test-timeout=60000 --test-concurrency=1 tests/hosted.test.mjs"
+  }
+}

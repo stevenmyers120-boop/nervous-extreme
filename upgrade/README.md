@@ -7,8 +7,8 @@ The room protocol is adapted from the working `distance.js`: anonymous membershi
 ## Library and remaining verification
 
 - The completed non-graphic library contains **500 authored concepts / 1,000 variants / 5,000 steps**, split 40 Warm-Up / 160 Getting Personal / 300 Extreme per mode. The editable source files are in `library-source/`; `scripts/build-library.mjs` creates JSON, and `scripts/validate-library.mjs` verifies its structure and screens similarity. Mode-specific physical adaptations are authored alongside their in-person steps.
-- No remote staging Firebase project is configured. `firebase-config.json` disables network multiplayer and refuses the production project ID. The mode screens are implemented, but room creation on a hosted copy requires separate staging configuration.
-- Frontend test URL (owner-private): https://nervous-extreme-upgrade-test.newcedar3.chatgpt.site . Hosted multiplayer is explicitly unavailable until staging Firebase is configured. No browser/mobile visual QA yet: JSDOM verifies actual control interactions, not browser layout or real phone behavior.
+- An isolated Spark-plan Firebase project `nervous-extreme-upgrade-test` is configured with anonymous authentication and locked-by-default Realtime Database rules. The app refuses the original production project ID.
+- Frontend test URL (owner-private): https://nervous-extreme-upgrade-test.newcedar3.chatgpt.site . The original frontend checkpoint uses disabled multiplayer; configured GitHub Pages staging will be used for browser verification.
 - The owner approved the **provocative, non-graphic adult content scope on 13 October 2026**. No intimate exposure, explicit sexual instructions, dangerous tasks or third-party contact are required.
 - Abandoned room expiry revokes access but does not erase records. A scheduled server cleanup job is required for unattended deletion. Explicit Stop deletes the entire room.
 
@@ -30,7 +30,7 @@ Install `jsdom`, `firebase@10.14.1`, `@firebase/rules-unit-testing@3.0.4` and `f
 
 ```sh
 node --test tests/engine.test.mjs
-firebase emulators:exec --only database --project demo-nervous-upgrade --config firebase.staging.json 'node --test --test-concurrency=1 tests/*.test.mjs'
+firebase emulators:exec --only database --project demo-nervous-upgrade --config firebase.staging.json 'node --test --test-concurrency=1 tests/engine.test.mjs tests/library.test.mjs tests/multiplayer.test.mjs'
 node scripts/build-library.mjs
 node scripts/validate-library.mjs
 ```
@@ -41,4 +41,4 @@ Keep the original Pages deployment intact. A future tested replacement can be ma
 
 ## Verified checkpoint — 13 October 2026
 
-11 automated tests passed: original-file preservation, complete library schema/counts, scoring, final-step locks, custom responses, complete stage-pool exhaustion, single-phone controls, and independent two-client in-person/remote emulator play including role changes, resume, restricted writes and offline Stop cleanup. JS syntax checks passed. Exact-duplicate and token-similarity screens found no candidates at their configured thresholds; these screens are not proof of semantic uniqueness. The five-step ladders were authored and inspected for disclosure or performance progression and practical evidence. Real-phone browser layout and hosted Firebase behaviour remain unverified. The Firebase console initially signed in but dropped the session before a staging project could be created; production was not changed.
+11 automated tests passed: original-file preservation, complete library schema/counts, scoring, final-step locks, custom responses, complete stage-pool exhaustion, single-phone controls, and independent two-client in-person/remote emulator play including role changes, resume, restricted writes and offline Stop cleanup. JS syntax checks passed. Exact-duplicate and token-similarity screens found no candidates at their configured thresholds; these screens are not proof of semantic uniqueness. The five-step ladders were authored and inspected for disclosure or performance progression and practical evidence. Real-phone browser layout and hosted Firebase behaviour remain unverified. Staging Firebase is now configured; production was not changed. Guest Decline validation is covered by both multiplayer modes.

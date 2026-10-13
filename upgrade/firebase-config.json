@@ -1,1 +1,13 @@
-{"enabled":false,"notice":"Multiplayer needs an isolated Firebase staging project. Production configuration is deliberately not used.","config":null}
+{
+  "enabled": true,
+  "notice": "Isolated upgrade test project; original production database is unchanged.",
+  "config": {
+    "apiKey": "AIzaSyCgUlyDzMDcfXvrHMjq4gJiVgb0wcq8jnk",
+    "authDomain": "nervous-extreme-upgrade-test.firebaseapp.com",
+    "databaseURL": "https://nervous-extreme-upgrade-test-default-rtdb.europe-west1.firebasedatabase.app",
+    "projectId": "nervous-extreme-upgrade-test",
+    "storageBucket": "nervous-extreme-upgrade-test.firebasestorage.app",
+    "messagingSenderId": "930685862816",
+    "appId": "1:930685862816:web:21011dbb6e6022afa8dac5"
+  }
+}
