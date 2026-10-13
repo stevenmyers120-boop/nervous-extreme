@@ -52,3 +52,15 @@ test('reject malformed settings and unsupported actions',()=>{
   for(const text of ['invalid','null','{}',JSON.stringify({names:['x','y'],target:100,surprise:'off',timerSeconds:15})])assert.equal(transition(base(),{id:'start',text},0,deck),null);
   assert.equal(transition(start(),{id:'nervous'},2,deck),null);assert.equal(transition(start(),{id:'missing'},0,deck),null);
 });
+test('entire stage pools can be exhausted without repeats or an invalid custom-round counter',()=>{
+  let s=start();
+  for(let m=1;m<=3;m++){
+    const expected=[40,160,300][m-1],before=s.used.length-1;
+    for(let i=0;i<expected;i++){
+      assert.equal(s.phase,'playing');assert.equal(deck.find(c=>c.id===s.task).stage,STAGES[m-1]);
+      s=transition(s,{id:'skip'},1-s.turn,deck,1000,()=>0);assert.equal(s.classics,0);
+    }
+    assert.equal(s.phase,'exhausted');assert.equal(s.used.length,before+expected);assert.equal(new Set(s.used).size,s.used.length);
+    if(m<3)s=transition(s,{id:'nextMatch'},0,deck,1000,()=>0);
+  }
+});
