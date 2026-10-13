@@ -1,0 +1,5 @@
+{
+  "method": "TF-IDF cosine over authored step content, common instruction words removed",
+  "threshold": 0.48,
+  "pairs": []
+}

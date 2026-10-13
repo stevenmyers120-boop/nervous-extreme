@@ -1,0 +1,14 @@
+{
+  "database": {
+    "rules": "staging.rules.json"
+  },
+  "emulators": {
+    "database": {
+      "port": 9001
+    },
+    "ui": {
+      "enabled": false
+    }
+  },
+  "singleProjectMode": true
+}

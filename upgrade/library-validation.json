@@ -1,0 +1,24 @@
+{
+  "status": "STRUCTURE PASSED",
+  "variants": 1000,
+  "concepts": 500,
+  "steps": 5000,
+  "counts": {
+    "in_person": {
+      "warm_up": 40,
+      "getting_personal": 160,
+      "extreme": 300
+    },
+    "remote": {
+      "warm_up": 40,
+      "getting_personal": 160,
+      "extreme": 300
+    }
+  },
+  "errors": [],
+  "nearDuplicateCandidates": [],
+  "limitations": [
+    "Token similarity is a screening aid, not a semantic diversity or escalation review.",
+    "Escalation, practicality and content review are required before a completed-library claim."
+  ]
+}
