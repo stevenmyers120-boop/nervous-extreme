@@ -8,7 +8,7 @@ The room protocol is adapted from the working `distance.js`: anonymous membershi
 
 - The completed non-graphic library contains **500 authored concepts / 1,000 variants / 5,000 steps**, split 40 Warm-Up / 160 Getting Personal / 300 Extreme per mode. The editable source files are in `library-source/`; `scripts/build-library.mjs` creates JSON, and `scripts/validate-library.mjs` verifies its structure and screens similarity. Mode-specific physical adaptations are authored alongside their in-person steps.
 - No remote staging Firebase project is configured. `firebase-config.json` disables network multiplayer and refuses the production project ID. The mode screens are implemented, but room creation on a hosted copy requires separate staging configuration.
-- A separate owner-private frontend test Site is being prepared. Hosted multiplayer is explicitly unavailable until staging Firebase is configured. No browser/mobile visual QA yet: JSDOM verifies actual control interactions, not browser layout or real phone behavior.
+- Frontend test URL (owner-private): https://nervous-extreme-upgrade-test.newcedar3.chatgpt.site . Hosted multiplayer is explicitly unavailable until staging Firebase is configured. No browser/mobile visual QA yet: JSDOM verifies actual control interactions, not browser layout or real phone behavior.
 - The owner approved the **provocative, non-graphic adult content scope on 13 October 2026**. No intimate exposure, explicit sexual instructions, dangerous tasks or third-party contact are required.
 - Abandoned room expiry revokes access but does not erase records. A scheduled server cleanup job is required for unattended deletion. Explicit Stop deletes the entire room.
 
@@ -38,3 +38,7 @@ node scripts/validate-library.mjs
 For a development environment with an outbound HTTP proxy, exclude loopback addresses or remove the proxy variables only from the emulator-test child process. The Firebase SDK's WebSocket connection needs direct loopback access. Expected permission-denied warnings are negative security tests.
 
 Keep the original Pages deployment intact. A future tested replacement can be made the main entry point after the owner's deployment approval.
+
+## Verified checkpoint — 13 October 2026
+
+11 automated tests passed: original-file preservation, complete library schema/counts, scoring, final-step locks, custom responses, complete stage-pool exhaustion, single-phone controls, and independent two-client in-person/remote emulator play including role changes, resume, restricted writes and offline Stop cleanup. JS syntax checks passed. Exact-duplicate and token-similarity screens found no candidates at their configured thresholds; these screens are not proof of semantic uniqueness. The five-step ladders were authored and inspected for disclosure or performance progression and practical evidence. Real-phone browser layout and hosted Firebase behaviour remain unverified. The Firebase console initially signed in but dropped the session before a staging project could be created; production was not changed.
