@@ -18,5 +18,7 @@
     "Duplicate wording is an editorial finding, not a JSON or gameplay coding error. It is retained without editing.",
     "Previous content and source files remain in Git. Current runtime JSON is the canonical manually edited source.",
     "Reload both devices and start a fresh room."
-  ]
+  ],
+  "hostedByteForByteMatch": true,
+  "browserSmoke": "Fresh Single Phone session rendered an imported prompt; Stop returned to the opening screen."
 }
