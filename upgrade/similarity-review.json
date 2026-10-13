@@ -1,5 +1,27 @@
 {
-  "method": "TF-IDF cosine over authored step content, common instruction words removed",
-  "threshold": 0.48,
-  "pairs": []
+  "libraryVersion": "adult-v2",
+  "method": "TF-IDF cosine, common instruction words and evidence suffixes removed",
+  "threshold": 0.6,
+  "pairs": [
+    {
+      "mode": "remote",
+      "a": "remote-adult-v2-getting_personal-147",
+      "b": "remote-adult-v2-extreme-271",
+      "titles": [
+        "SEX WORD ON YOUR ARM",
+        "FOREARM FILTH"
+      ],
+      "similarity": 0.634
+    }
+  ],
+  "editorialReview": [
+    {
+      "titles": [
+        "SEX WORD ON YOUR ARM",
+        "FOREARM FILTH"
+      ],
+      "decision": "Retained as separate concepts",
+      "reason": "One is self-selected adult lettering; the other is a partner-created crude drawing and caption. The shared forearm/material/evidence vocabulary triggered screening."
+    }
+  ]
 }

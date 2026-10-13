@@ -2,6 +2,8 @@
 
 Test URL: https://stevenmyers120-boop.github.io/nervous-extreme/upgrade/
 
+Library under test: **adult-v2**, the complete adult-content replacement. See `CONTENT-REVIEW.md`.
+
 ## Automated results
 
 | Check | Evidence | Result |
@@ -9,7 +11,7 @@ Test URL: https://stevenmyers120-boop.github.io/nervous-extreme/upgrade/
 | Original files and old rules preserved | engine preservation tests; Git diff against baseline | Passed |
 | 500 concepts / 1,000 variants / 5,000 steps; 40/160/300 per mode | library validator and library tests | Passed |
 | Unique IDs, five-step schema and evidence metadata | library tests | Passed |
-| Exact and near-duplicate screening | token Jaccard ≥0.65; TF-IDF cosine >0.48 | No candidates |
+| Exact and near-duplicate screening | token Jaccard ≥0.65; TF-IDF cosine >0.60 | No token candidates; one reviewed forearm-art motif retained |
 | Scoring, stage transitions, exhaustion and fresh pools | engine tests; all 500 concepts exhausted per mode | Passed |
 | Single Phone controls, consent, final reveal, Nervous and Stop | actual app in JSDOM | Passed |
 | Both multiplayer modes, room joining and mode inheritance | independent Firebase emulator clients; hosted anonymous clients | Passed |
@@ -20,7 +22,9 @@ Test URL: https://stevenmyers120-boop.github.io/nervous-extreme/upgrade/
 | Online Stop during a pending action; offline Stop queues deletion before reconnect | regression assertions in both environments | Passed |
 | Late ended-session callbacks do not replace Stop message with a permissions error | regression assertions | Passed |
 
-The final emulator suite reports **11 passed, 0 failed**. The hosted suite reports **3 passed, 0 failed**. Authentication is real anonymous Firebase authentication in hosted tests; JSDOM wraps the app controls and the SDK connections are independent. Browser authentication/token values are never extracted. JavaScript syntax checks and JSON validation passed. Raw outputs are saved alongside this report.
+The final emulator suite reports **12 passed, 0 failed**. The hosted suite reports **3 passed, 0 failed**. Authentication is real anonymous Firebase authentication in hosted tests; JSDOM wraps the app controls and the SDK connections are independent. Browser authentication/token values are never extracted. JavaScript syntax checks and JSON validation passed. Raw outputs are saved alongside this report.
+
+The new content checks verify all 30 terms, a contact pool of at least 100, removal of performance categories and versioned IDs. Both independent-client tests also check that an old-library task hides completion controls, keeps Stop available and recovers when the current task is restored.
 
 ## Actual Chromium browser checks
 
@@ -38,7 +42,7 @@ The final emulator suite reports **11 passed, 0 failed**. The hosted suite repor
 | Decline and immediate local Stop; peer room closure | Passed |
 | Firebase data view after completed QA runs | Test records removed |
 
-The Snapchat evidence check uses a synthetic test acknowledgement, not a real media transfer. No player data or intimate media was used in testing.
+The full browser mechanics checks below were performed on the preceding working release; a fresh adult-v2 browser check is recorded in the release checkpoint. The Snapchat evidence check uses a synthetic test acknowledgement, not a real media transfer. No player data or intimate media was used in testing.
 
 ## Responsive checks
 

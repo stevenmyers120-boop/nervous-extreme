@@ -7,7 +7,7 @@ let DECK=[],db,auth,uid,ref,room='',role=0,other='',offset=0,online=false,peer=f
 const now=()=>Date.now()+offset;
 const actor=()=>local?s.turn:role;
 const c=()=>s&&s.turn===actor();
-const libraryReady=fetch('challenge-library.json').then(r=>{if(!r.ok)throw Error('Challenge library could not load.');return r.json();}).then(d=>{DECK=d.challenges;return DECK;});
+const libraryReady=fetch('challenge-library.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Challenge library could not load.');return r.json();}).then(d=>{if(d.libraryVersion!=='adult-v2'||!Array.isArray(d.challenges))throw Error('The adult library update has not loaded. Reload the page and start a fresh room.');DECK=d.challenges;return DECK;});
 libraryReady.catch(e=>txt('connectStatus',e.message));
 const settingsReady=fetch('firebase-config.json').then(r=>{if(!r.ok)throw Error('Staging configuration could not load.');return r.json();}).then(settings=>{multiplayerEnabled=!!(settings.enabled&&settings.config);if(!multiplayerEnabled)txt('connectStatus',settings.notice||'Multiplayer staging setup pending. Single Phone is ready.');busy(connecting);return settings;});
 settingsReady.catch(e=>{multiplayerEnabled=false;busy(false);txt('connectStatus',e.message);});
@@ -60,6 +60,7 @@ async function process(snapshot){
 }
 async function action(id,text='',media='photo',who=actor()){
   if(pending||!s)return;
+  if(s.mode==='classic'&&s.task&&!DECK.some(t=>t.id===s.task&&t.mode===s.playingMode)){txt('gameError','This room uses an earlier challenge library. STOP, reload both devices and create a fresh room.');return;}
   if(local){const n=transition(s,{id,text,media},who,DECK,now());if(n){s=n;revision++;render();}return;}
   if(!ref||!online||!peer){txt('gameError','Waiting for both devices to reconnect. STOP remains available.');return;}
   const gen=generation;pending=true;render();try{
@@ -80,6 +81,7 @@ function render(){
   txt('status',s.status);show('challengeCard',!winner);show('winnerScreen',winner);
   if(winner){const r=s.results.at(-1);txt('winnerTitle',s.phase==='exhausted'?'STAGE POOL COMPLETE':s.names[r.winner]+' wins match '+s.match);txt('winnerScores',s.names[0]+' '+s.wins[0]+' · '+s.names[1]+' '+s.wins[1]);$('matchHistory').replaceChildren(...s.results.map(r=>{const p=document.createElement('p');p.textContent=LABELS[r.match-1]+' · '+(r.winner===-1?'Draw':s.names[r.winner])+' · '+r.scores.join(' – ');return p;}));show('nextMatch',s.match<3&&s.phase!=='finished');$('nextMatch').disabled=!local&&(!online||!peer||pending);show('playAgain',s.phase==='finished');show('overallWinner',s.phase==='finished');if(s.phase==='finished'){const totals=[0,0];s.results.forEach(r=>{if(r.winner>=0)totals[r.winner]++;});txt('overallWinner',totals[0]===totals[1]?'CHAMPIONSHIP DRAW':s.names[totals[0]>totals[1]?0:1]+' WINS THE CHAMPIONSHIP · '+totals.join(' – '));}return;}
   const card=DECK.find(t=>t.id===s.task),key=s.match+':'+s.round+':'+s.level+':'+s.submitted+':'+s.custom;
+  const libraryMismatch=s.mode==='classic'&&!card;
   if(draftKey!==key){$('answerBox').value='';$('customText').value='';draftKey=key;}
   txt('category',s.mode==='classic'?card?.category.toUpperCase()||'LIBRARY ERROR':'CUSTOM '+s.mode.toUpperCase());txt('roundLabel','ROUND '+s.round);txt('intensity',LABELS[s.match-1]+' · FIRST TO '+s.target);txt('challengeTitle',s.mode==='classic'?card?.title||'Challenge unavailable':'YOUR CUSTOM '+s.mode.toUpperCase());txt('levelLabel',s.mode==='classic'?'STEP '+(s.level+1)+' / 5':'SURPRISE ROUND');txt('playerDirection',s.names[s.turn]+' → '+s.names[challenger]);
   $('steps').replaceChildren(...[0,1,2,3,4].map(i=>{const e=document.createElement('i');e.className=i<=s.level?'on':'';return e;}));show('steps',s.mode==='classic');
@@ -91,6 +93,7 @@ function render(){
   show('sendAnswer',!conductor&&!s.submitted&&!locked&&text);show('evidenceSent',!conductor&&!s.submitted&&!locked&&evidence);show('complete',conductor&&!locked&&(s.submitted||s.responseType==='live'));show('retry',conductor&&!locked&&s.submitted);txt('complete',s.mode!=='classic'||s.level===4?'COMPLETE · CHALLENGER +1':'COMPLETE · NEXT STEP');
   txt('callNervous',local?s.names[challenger]+' · NERVOUS · +1':s.names[role]+' · NERVOUS · '+(conductor?'+2':'+1'));show('otherNervous',local);txt('otherNervous',s.names[s.turn]+' · NERVOUS · +2');
   for(const id of ['sendAnswer','evidenceSent','complete','retry','callNervous','otherNervous','skip','revealFinal','setCustom'])$(id).disabled=pending||(!local&&(!online||!peer));timer();
+  show('actionButtons',!libraryMismatch);if(libraryMismatch){show('responsePanel',false);show('revealFinal',false);show('timerDisplay',false);txt('taskPrompt','This room uses an earlier challenge library. STOP, reload both devices and create a fresh room.');}
 }
 function timer(){if(!s)return;show('timerDisplay',s.timerSeconds>0&&s.phase==='playing'&&unlocked(s));if(s.timerSeconds){const secs=Math.max(0,Math.ceil((s.timerUntil-now())/1000));txt('timerDisplay',s.submitted?'TIMER PAUSED FOR REVIEW':secs?'OPTIONAL TIMER · '+secs+'s':'TAKE YOUR TIME · NO SCORING PENALTY');}}
 async function end(){
