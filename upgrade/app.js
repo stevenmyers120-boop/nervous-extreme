@@ -33,7 +33,7 @@ async function firebaseBoot(){
   })();
   try{return await boot;}catch(e){boot=null;throw e;}
 }
-async function presence(){if(!ref||!uid)return;const p=ref.child('presence/'+uid);try{await p.onDisconnect().set(false);await p.set(true);}catch(e){err(e);}}
+async function presence(){if(!ref||!uid)return;const p=ref.child('presence/'+uid),gen=generation;try{await p.onDisconnect().set(false);if(gen===generation)await p.set(true);}catch(e){if(gen===generation)err(e);}}
 function lobby(){show('home',false);show('connect',false);show('lobby',true);show('roomInfo',!local);show('hostSetup',local||role===0);show('guestNote',!local&&role===1);show('startGame',local||role===0);txt('readyLabel',local?'We are both 18+, agree to play, and know either of us can decline or stop.':'I am 18+, agree to play, and know I can decline or stop.');txt('lobbyMode',local?'SINGLE PHONE · IN PERSON':s?.playingMode==='remote'?'MULTIPLE DEVICES · REMOTE':'MULTIPLE DEVICES · IN PERSON');}
 async function attach(code,r){
   const candidate=db.ref('upgradeRooms/'+code),meta=(await candidate.once('value')).val();if(!meta||meta.expiresAt<=now())throw Error('This room has ended or expired.');if(meta.hostUid!==uid&&meta.guestUid!==uid)throw Error('This room belongs to another session.');
@@ -47,7 +47,7 @@ async function attach(code,r){
   watch(ref.child('guestUid'),'value',()=>{peer=!!present[other];render();});
   watch(ref.child('ready'),'value',v=>{ready=v.val()||{};$('readyCheck').checked=!!ready[uid];render();});
   watch(ref.child('game'),'value',v=>{const g=v.val();if(g){s=normalize(g.state);revision=g.revision;lobby();render();}else if(s){cleanup();show('home',false);show('connect',true);txt('connectStatus','Room ended and its gameplay data was deleted.');}});
-  if(role===0){if(!meta.game)await ref.child('game').set({revision:1,state:base(selected),updatedAt:firebase.database.ServerValue.TIMESTAMP});watch(ref.child('actions'),'child_added',v=>{const gen=generation;queue=queue.then(()=>gen===generation?process(v):undefined).catch(err);});}
+  if(role===0){if(!meta.game)await ref.child('game').set({revision:1,state:base(selected),updatedAt:firebase.database.ServerValue.TIMESTAMP});watch(ref.child('actions'),'child_added',v=>{const gen=generation;queue=queue.then(()=>gen===generation?process(v):undefined).catch(e=>{if(gen===generation)err(e);});});}
   lobby();await presence();render();
 }
 function busy(b){connecting=b;for(const id of ['createRoom','joinRoom'])$(id).disabled=b||multiplayerEnabled===false;for(const id of ['single','together','apart'])$(id).disabled=b;}
@@ -62,13 +62,13 @@ async function action(id,text='',media='photo',who=actor()){
   if(pending||!s)return;
   if(local){const n=transition(s,{id,text,media},who,DECK,now());if(n){s=n;revision++;render();}return;}
   if(!ref||!online||!peer){txt('gameError','Waiting for both devices to reconnect. STOP remains available.');return;}
-  pending=true;render();try{
-    const r=ref.child('actions').push(),gen=generation;
+  const gen=generation;pending=true;render();try{
+    const r=ref.child('actions').push();
     await r.set({id,uid,at:firebase.database.ServerValue.TIMESTAMP,revision,text,media});
     // Only this action's acknowledgement releases its pending latch. A game
     // snapshot from a different action cannot allow a stale duplicate click.
-    const fn=v=>{if(gen!==generation){r.off('value',fn);return;}if(!v.exists()){r.off('value',fn);pending=false;render();}};r.on('value',fn,e=>{r.off('value',fn);err(e);});stops.push(()=>r.off('value',fn));
-  }catch(e){err(e);}
+    const fn=v=>{if(gen!==generation){r.off('value',fn);return;}if(!v.exists()){r.off('value',fn);pending=false;render();}};r.on('value',fn,e=>{r.off('value',fn);if(gen===generation)err(e);});stops.push(()=>r.off('value',fn));
+  }catch(e){if(gen===generation)err(e);}
 }
 function render(){
   if(!s)return;const playing=s.phase!=='setup';document.body.classList.toggle('playing',playing);show('home',false);show('connect',false);show('lobby',!playing);show('game',playing);show('privacyFoot',!playing);
@@ -108,7 +108,7 @@ async function leave(){if(local)return cleanup();if(role===0||s&&s.phase!=='setu
 function connect(mode){selected=mode;show('home',false);show('connect',true);txt('selectedMode',mode==='remote'?'MULTIPLE DEVICES · REMOTE':'MULTIPLE DEVICES · IN PERSON');}
 $('single').onclick=async()=>{try{await libraryReady;local=true;role=0;s=base('in_person');lobby();render();}catch(e){show('home',false);show('connect',true);err(e);}};
 $('multi').onclick=()=>show('deviceChoice',true);$('together').onclick=()=>connect('in_person');$('apart').onclick=()=>connect('remote');$('showJoin').onclick=()=>{connect('in_person');show('joinPanel',true);};$('backHome').onclick=cleanup;$('joinChoice').onclick=()=>show('joinPanel',true);$('createRoom').onclick=create;$('joinRoom').onclick=join;
-$('readyCheck').onchange=async()=>{if(local){render();return;}try{await ref.child('ready/'+uid).set($('readyCheck').checked);}catch(e){err(e);}};
+$('readyCheck').onchange=async()=>{if(local){render();return;}const gen=generation;try{await ref.child('ready/'+uid).set($('readyCheck').checked);}catch(e){if(gen===generation)err(e);}};
 $('startGame').onclick=()=>{if(local&&!$('readyCheck').checked)return;action('start',JSON.stringify({names:[$('player0').value.trim()||'Player 1',$('player1').value.trim()||'Player 2'],target:+$('target').value,surprise:$('surprises').value,timerSeconds:+$('timerSetting').value}));};
 $('sendAnswer').onclick=()=>{if(!$('answerBox').value.trim()){txt('gameError','Write an answer first.');return;}action('submitAnswer',$('answerBox').value);};
 for(const [button,id] of Object.entries({evidenceSent:'evidenceSent',complete:'complete',retry:'retry',revealFinal:'reveal',nextMatch:'nextMatch',skip:'skip'}))$(button).onclick=()=>action(id);

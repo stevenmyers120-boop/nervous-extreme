@@ -1,44 +1,58 @@
-# Nervous Extreme — existing-game upgrade branch
+# Nervous Extreme — unified upgrade test
 
-This is the **isolated upgrade awaiting hosted multiplayer verification and deployment approval**. The live original remains unchanged. Baseline: `7dec9af9363bec84d79db27226469adbbff5e245`. GitHub backup branch: `backup/pre-upgrade-2026-10-13`. Development branch: `upgrade/unified-2026-10-13`.
+Working test URL: https://stevenmyers120-boop.github.io/nervous-extreme/upgrade/
 
-The room protocol is adapted from the working `distance.js`: anonymous membership, atomic guest claim, presence, ready checks, host-processed revision-tagged actions, server-adjusted clocks and session resume. A shared engine supplies all three playing modes through one `upgrade/index.html` entry point. Scoring retains the original 1-point challenger Nervous / 2-point conductor Nervous / 1-point full challenge rules and three-match championship. Only conductor controls can complete; remote completion also requires a submitted response. Decline gives no points; Stop is available even while the peer is absent. Offline Stop ends the local screen and defers room deletion until reconnect.
+The original root game remains unchanged. Every original tracked file matches baseline commit `7dec9af9363bec84d79db27226469adbbff5e245`, preserved on `backup/pre-upgrade-2026-10-13`. Development is preserved on `upgrade/unified-2026-10-13`. Only the additive `upgrade/` directory is published for testing. Replacing the root entry point still requires the owner's approval.
 
-## Library and remaining verification
+## Implemented
 
-- The completed non-graphic library contains **500 authored concepts / 1,000 variants / 5,000 steps**, split 40 Warm-Up / 160 Getting Personal / 300 Extreme per mode. The editable source files are in `library-source/`; `scripts/build-library.mjs` creates JSON, and `scripts/validate-library.mjs` verifies its structure and screens similarity. Mode-specific physical adaptations are authored alongside their in-person steps.
-- An isolated Spark-plan Firebase project `nervous-extreme-upgrade-test` is configured with anonymous authentication and locked-by-default Realtime Database rules. The app refuses the original production project ID.
-- Frontend test URL (owner-private): https://nervous-extreme-upgrade-test.newcedar3.chatgpt.site . The original frontend checkpoint uses disabled multiplayer; configured GitHub Pages staging will be used for browser verification.
-- The owner approved the **provocative, non-graphic adult content scope on 13 October 2026**. No intimate exposure, explicit sexual instructions, dangerous tasks or third-party contact are required.
-- Abandoned room expiry revokes access but does not erase records. A scheduled server cleanup job is required for unattended deletion. Explicit Stop deletes the entire room.
+- One entry point: Single Phone, Multiple Devices In Person, Multiple Devices Remote. Joining inherits the host's mode.
+- Existing scoring and room/action protocol adapted into a shared engine: challenger Nervous awards conductor 1; conductor Nervous awards challenger 2; completing five steps awards challenger 1. Three matches, selectable 10/15/20 targets, final-step reveal, optional timers and custom surprise rounds.
+- Dark crimson mobile layout, orange glow, bold distressed typography, real accessible controls, shared scores, challenge cards and room screens.
+- Conductor-only completion. Shared text answers for remote truths; Snapchat photo/video evidence markers for remote dares. No media uploads into the database. Custom challenges accept any topic within the overall rules.
+- No repeated concept within a game, eligible current-stage selection, fresh pools for new games and graceful stage exhaustion.
+- Decline skips without points. Stop closes the local game immediately, queues deletion even while offline and retries after reconnect/session resume. Late callbacks from the ended session cannot overwrite the final message. Submitted answers clear at the next step; selection history clears at championship completion.
 
-## Run locally
+## Challenge library
 
-Serve this directory over HTTP using your normal development server. Single Phone is independent of Firebase. The JS modules and JSON cannot run through `file://`.
+The owner approved the provocative, non-graphic adult scope on 13 October 2026. The library has **500 authored concepts, 1,000 mode variants and 5,000 steps**. Editable packed source is in `library-source/`; `scripts/build-library.mjs` produces the maintainable JSON.
 
-## Isolated staging Firebase
+| Stage | In Person | Remote |
+|---|---:|---:|
+| Warm-Up | 40 | 40 |
+| Getting Personal | 160 | 160 |
+| Extreme | 300 | 300 |
+| Total | 500 | 500 |
 
-Do not deploy to `nervous-extreme`. Use a separate Firebase project, enable anonymous Authentication and Realtime Database, and configure the new project's **public client configuration** in `firebase-config.json` with `enabled: true`. Set the matching staging database URL and project ID. Never put service-account keys or other credentials in this file.
+Each variant has its own ID, title, stage, category, mode, five progressive prompts and evidence metadata. Physical adaptations are authored alongside their remote alternatives. Exact-duplicate, token and TF-IDF screens found no candidates at their configured thresholds. Similarity screens do not prove semantic uniqueness; the authored ladders were inspected for disclosure/performance progression and practical evidence.
 
-`staging.rules.json` adds `upgradeRooms` and keeps both original namespaces exactly unchanged. `scripts/build-rules.py` reproduces it. `firebase.staging.json` configures only the local emulator; production `firebase.json` and `database.rules.json` remain untouched. Deploy these rules only to an explicitly selected staging project. Never change production rules or Pages settings before approval.
+## Isolated Firebase
 
-The host device remains authoritative and must stay online to process actions. Rules reject other players and guest completion requests on challenger turns; they do not provide a trusted server against a modified host client. Text is rendered through `textContent`. Photos/videos are never uploaded into Firebase.
+The no-cost Spark project `nervous-extreme-upgrade-test` has anonymous authentication and Realtime Database in Belgium. `firebase-config.json` contains its public Web SDK configuration; the app refuses the original production project ID. No service-account credentials are included.
 
-## Tests
+`staging-only.rules.json` is deployed to this separate project. `staging.rules.json` additionally retains both old namespaces exactly for preservation tests. `scripts/build-rules.py` generates both. Production `firebase.json` and `database.rules.json` are untouched.
 
-Install `jsdom`, `firebase@10.14.1`, `@firebase/rules-unit-testing@3.0.4` and `firebase-tools@13.35.1` in the development environment. Java 17 is required for the Database emulator.
+Rules restrict membership, guest claims, readiness, revision-tagged actions, role permissions and payload sizes. The host phone processes actions and must remain connected; this architecture does not prevent a modified host from cheating. Submitted text is visible to the partner and stored temporarily in Firebase; screenshots cannot be prevented. Snapchat is an external manual evidence channel.
+
+## Verification — 13 October 2026
+
+See `QA-REPORT.md`, `test-results.txt` and `hosted-test-results.txt`.
+
+- 11 engine/library/actual-control emulator tests passed.
+- 3 tests with actual anonymous accounts and independent connections to hosted staging Firebase passed.
+- Chromium browser checks passed for joining, both modes, conductor rotation, scoring, text, custom truths/dares, final-step reveal, resume and Stop.
+- Four phone-sized iframe viewports were inspected and exercised: 360×740, 390×844, 414×896, 740×360. No horizontal content overflow; setup, completion, Decline and Stop worked.
+
+Physical Android/iOS devices and Safari were not available. Snapchat transmission itself was not automated; the game's instructions and evidence marker were verified. Room expiry revokes access after four hours but does not delete unattended abandoned records; a scheduled server cleanup service would be required for that. Explicit Stop deletes the entire room. Completed games clear text and selection history.
+
+## Development
+
+Use Node 24.15+ and Java 17. Install pinned development dependencies with `npm install`. Serve this directory over HTTP; ES modules and JSON cannot run through `file://`.
 
 ```sh
-node --test tests/engine.test.mjs
-firebase emulators:exec --only database --project demo-nervous-upgrade --config firebase.staging.json 'node --test --test-concurrency=1 tests/engine.test.mjs tests/library.test.mjs tests/multiplayer.test.mjs'
-node scripts/build-library.mjs
-node scripts/validate-library.mjs
+npm run validate
+firebase emulators:exec --only database --project demo-nervous-upgrade --config firebase.staging.json 'npm test'
+npm run test:hosted
 ```
 
-For a development environment with an outbound HTTP proxy, exclude loopback addresses or remove the proxy variables only from the emulator-test child process. The Firebase SDK's WebSocket connection needs direct loopback access. Expected permission-denied warnings are negative security tests.
-
-Keep the original Pages deployment intact. A future tested replacement can be made the main entry point after the owner's deployment approval.
-
-## Verified checkpoint — 13 October 2026
-
-11 automated tests passed: original-file preservation, complete library schema/counts, scoring, final-step locks, custom responses, complete stage-pool exhaustion, single-phone controls, and independent two-client in-person/remote emulator play including role changes, resume, restricted writes and offline Stop cleanup. JS syntax checks passed. Exact-duplicate and token-similarity screens found no candidates at their configured thresholds; these screens are not proof of semantic uniqueness. The five-step ladders were authored and inspected for disclosure or performance progression and practical evidence. Real-phone browser layout and hosted Firebase behaviour remain unverified. Staging Firebase is now configured; production was not changed. Guest Decline validation is covered by both multiplayer modes.
+Hosted tests guard against any project except the isolated test project and create disposable anonymous accounts/rooms. Expected permission-denied warnings are negative security tests. For an environment with an outbound proxy, exclude loopback or remove proxy variables only from the emulator-test child process; do not remove the external networking configuration from hosted tests. `qa.html` provides the browser layout fixtures.
