@@ -2,9 +2,9 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
-import {base,transition,STAGES} from '../engine.js';
+import {base,transition,STAGES,stageFor} from '../engine.js';
 const deck=JSON.parse(fs.readFileSync(new URL('../challenge-library.json',import.meta.url))).challenges;
-const start=(mode='in_person',cards=deck)=>transition(base(mode),{id:'start',text:JSON.stringify({names:['Alex','Sam'],target:10,surprise:'off',timerSeconds:15})},0,cards,1000,()=>0);
+const start=(mode='in_person',cards=deck)=>transition(base(mode),{id:'start',text:JSON.stringify({names:['Alex','Sam'],target:15,surprise:'off',timerSeconds:15})},0,cards,1000,()=>0);
 test('original working files and production Firebase rules remain byte-for-byte preserved',()=>{
   for(const file of ['index.html','distance.html','distance.js','distance-deck.json','database.rules.json','firebase.json']){
     const original=execFileSync('git',['show','7dec9af9363bec84d79db27226469adbbff5e245:'+file],{cwd:new URL('../../',import.meta.url)});
@@ -45,11 +45,11 @@ test('stage-only selection, no repeat on exhaustion, three matches and cleanup',
   let s=start('in_person',small);s=transition(s,{id:'skip'},1,small,1000,()=>0);assert.equal(s.phase,'exhausted');assert.equal(s.used.length,1);assert.equal(s.task,'');
   s=transition(s,{id:'nextMatch'},1,small,1000,()=>0);assert.equal(s.match,2);assert.equal(s.used.length,2);assert.equal(small.find(t=>t.id===s.task).stage,STAGES[1]);
   s=transition(s,{id:'skip'},1,small,1000,()=>0);s=transition(s,{id:'nextMatch'},0,small,1000,()=>0);assert.equal(s.match,3);assert.equal(s.used.length,3);
-  let full=start();for(let m=1;m<=3;m++){full={...full,match:m,wins:[9,0],round:1,turn:0};full=transition(full,{id:'nervous'},1,deck,1000,()=>0);assert.equal(full.phase,m===3?'finished':'winner');assert.equal(full.answer,'');if(m<3)full=transition(full,{id:'nextMatch'},1,deck,1000,()=>0);}
+  let full=start();for(let m=1;m<=3;m++){full={...full,match:m,wins:[14,0],round:1,turn:0};full=transition(full,{id:'nervous'},1,deck,1000,()=>0);assert.equal(full.phase,m===3?'finished':'winner');assert.equal(full.answer,'');if(m<3)full=transition(full,{id:'nextMatch'},1,deck,1000,()=>0);}
   assert.equal(full.results.length,3);assert.deepEqual(full.used,[]);assert.equal(full.custom,'');assert.equal(full.task,'');
 });
 test('reject malformed settings and unsupported actions',()=>{
-  for(const text of ['invalid','null','{}',JSON.stringify({names:['x','y'],target:100,surprise:'off',timerSeconds:15})])assert.equal(transition(base(),{id:'start',text},0,deck),null);
+  for(const text of ['invalid','null','{}',JSON.stringify({names:['x','y'],target:150,surprise:'off',timerSeconds:15})])assert.equal(transition(base(),{id:'start',text},0,deck),null);
   assert.equal(transition(start(),{id:'nervous'},2,deck),null);assert.equal(transition(start(),{id:'missing'},0,deck),null);
 });
 test('entire stage pools can be exhausted without repeats or an invalid custom-round counter',()=>{
@@ -63,4 +63,24 @@ test('entire stage pools can be exhausted without repeats or an invalid custom-r
     assert.equal(s.phase,'exhausted');assert.equal(s.used.length,before+expected);assert.equal(new Set(s.used).size,s.used.length);
     if(m<3)s=transition(s,{id:'nextMatch'},0,deck,1000,()=>0);
   }
+});
+
+test('score thresholds select the next stage in all three rounds and both modes',()=>{
+  for(const mode of ['in_person','remote']){
+    let s=start(mode);
+    for(const [match,wins,expected] of [[1,[3,3],'warm_up'],[1,[3,4],'getting_personal'],[1,[11,0],'getting_personal'],[1,[12,0],'extreme'],[2,[9,0],'getting_personal'],[2,[0,10],'extreme'],[3,[0,0],'extreme']]){
+      const state={...s,match,wins};assert.equal(stageFor(state),expected);
+      const next=transition(state,{id:'skip'},state.turn,deck,1000,()=>0);assert.equal(deck.find(c=>c.id===next.task).stage,expected);
+    }
+    s={...s,wins:[3,3],submitted:true};const original=s.task;
+    s=transition(s,{id:'complete'},s.turn,deck,1000,()=>0);assert.equal(s.task,original);
+    s=transition(s,{id:'nervous'},1-s.turn,deck,1000,()=>0);assert.equal(deck.find(c=>c.id===s.task).stage,'getting_personal');
+    s={...s,wins:[0,11],turn:0};s=transition(s,{id:'nervous'},s.turn,deck,1000,()=>0);assert.deepEqual(s.wins,[0,13]);assert.equal(deck.find(c=>c.id===s.task).stage,'extreme');
+    s={...s,wins:[14,0]};s=transition(s,{id:'nervous'},1-s.turn,deck,1000,()=>0);assert.equal(s.phase,'winner');
+    s=transition(s,{id:'nextMatch'},0,deck,1000,()=>0);assert.deepEqual(s.wins,[0,0]);assert.equal(deck.find(c=>c.id===s.task).stage,'getting_personal');
+  }
+});
+test('fixed fifteen-point target cannot be overridden',()=>{
+  for(const target of [10,20,100])assert.equal(transition(base(),{id:'start',text:JSON.stringify({names:['A','B'],target,surprise:'off',timerSeconds:0})},0,deck),null);
+  const s=transition(base(),{id:'start',text:JSON.stringify({names:['A','B'],surprise:'off',timerSeconds:0})},0,deck);assert.equal(s.target,15);
 });
