@@ -1,5 +1,12 @@
 export const STAGES=['warm_up','getting_personal','extreme'];
 export const LABELS=['WARM-UP','GETTING PERSONAL','EXTREME'];
+export const POINTS_TO_WIN=15;
+export function stageFor(s){
+  const highest=Math.max(...s.wins);
+  if(s.match===3)return 'extreme';
+  if(s.match===2)return highest>=10?'extreme':'getting_personal';
+  return highest>=12?'extreme':s.wins[0]+s.wins[1]>=7?'getting_personal':'warm_up';
+}
 export function randomIndex(size){
   if(!Number.isInteger(size)||size<1)throw Error('Empty random pool');
   const a=new Uint32Array(1),limit=Math.floor(4294967296/size)*size;
@@ -18,13 +25,13 @@ export function transition(state,a,actor,deck,now=Date.now(),pick=randomIndex){
   const card=()=>deck.find(t=>t.id===n.task&&t.mode===n.playingMode);
   const reset=()=>{n.answer='';n.submitted=false;n.revealed=false;n.timerUntil=n.timerSeconds&&!(n.mode==='classic'&&n.level===4)?now+n.timerSeconds*1000:0;};
   const choose=()=>{
-    const pool=deck.filter(t=>t.mode===n.playingMode&&t.stage===STAGES[n.match-1]&&!n.used.includes(t.conceptId));
+    const pool=deck.filter(t=>t.mode===n.playingMode&&t.stage===stageFor(n)&&!n.used.includes(t.conceptId));
     if(!pool.length){n.phase='exhausted';n.task='';n.answer='';n.custom='';n.submitted=false;n.timerUntil=0;n.status='All challenges in this stage have been played. Continue to the next stage or end the game.';return;}
     const t=pool[pick(pool.length)];n.task=t.id;n.used.push(t.conceptId);n.responseType=t.steps[0].type;
   };
   const finish=(winner,points)=>{
     n.wins[winner]+=points;reset();n.timerUntil=0;
-    if(n.wins[winner]>=n.target){n.results.push({match:n.match,winner,scores:[...n.wins]});n.phase=n.match===3?'finished':'winner';n.custom='';n.task='';if(n.phase==='finished')n.used=[];return;}
+    if(n.wins[winner]>=POINTS_TO_WIN){n.results.push({match:n.match,winner,scores:[...n.wins]});n.phase=n.match===3?'finished':'winner';n.custom='';n.task='';if(n.phase==='finished')n.used=[];return;}
     if(n.surprise==='off')n.classics=0;
     else if(n.mode==='classic')n.classics++;
     n.round++;n.turn=(n.round-1)%2;n.level=0;n.custom='';
@@ -35,8 +42,8 @@ export function transition(state,a,actor,deck,now=Date.now(),pick=randomIndex){
   if(a.id==='start'){
     if(actor!==0||n.phase!=='setup')return null;
     let opt;try{opt=JSON.parse(text);}catch{return null;}
-    if(!opt||!Array.isArray(opt.names)||opt.names.length!==2||!opt.names.every(t=>typeof t==='string'&&t.trim().length>0&&t.length<=30)||![10,15,20].includes(opt.target)||!['random','truth','dare','off'].includes(opt.surprise)||![0,15,30].includes(opt.timerSeconds))return null;
-    n.names=opt.names.map(t=>t.trim());n.target=opt.target;n.surprise=opt.surprise;n.timerSeconds=opt.timerSeconds;n.phase='playing';choose();if(n.phase==='playing')reset();return n;
+    if(!opt||!Array.isArray(opt.names)||opt.names.length!==2||!opt.names.every(t=>typeof t==='string'&&t.trim().length>0&&t.length<=30)||(opt.target!==undefined&&opt.target!==POINTS_TO_WIN)||!['random','truth','dare','off'].includes(opt.surprise)||![0,15,30].includes(opt.timerSeconds))return null;
+    n.names=opt.names.map(t=>t.trim());n.target=POINTS_TO_WIN;n.surprise=opt.surprise;n.timerSeconds=opt.timerSeconds;n.phase='playing';choose();if(n.phase==='playing')reset();return n;
   }
   if(a.id==='nextMatch'){
     if(!['winner','exhausted'].includes(n.phase)||n.match>=3)return null;
@@ -44,7 +51,7 @@ export function transition(state,a,actor,deck,now=Date.now(),pick=randomIndex){
     n.match++;n.round=1;n.turn=0;n.level=0;n.wins=[0,0];n.mode='classic';n.custom='';n.classics=0;n.nextSurprise=3+pick(2);n.phase='playing';n.status='';choose();if(n.phase==='playing')reset();return n;
   }
   if(n.phase!=='playing')return null;
-  if(a.id==='nervous'){n.status=n.names[actor]+' called NERVOUS.';finish(c?1-actor:n.turn,c?2:1);return n;}
+  if(a.id==='nervous'){n.status=n.names[actor]+' called TOO FAR.';finish(c?1-actor:n.turn,c?2:1);return n;}
   if(a.id==='skip'){n.status='Challenge declined. No points awarded.';finish(n.turn,0);return n;}
   if(a.id==='reveal'&&c&&n.mode==='classic'&&n.level===4&&!n.revealed){n.revealed=true;n.timerUntil=n.timerSeconds?now+n.timerSeconds*1000:0;return n;}
   if(a.id==='setCustom'&&c&&n.mode!=='classic'&&!n.custom&&text&&text.length<=1000){n.custom=text;n.responseType=n.playingMode==='remote'?(n.mode==='truth'?'text':a.media==='video'?'video':'photo'):'live';reset();return n;}

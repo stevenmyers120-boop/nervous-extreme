@@ -1,0 +1,17 @@
+✔ original working files and production Firebase rules remain byte-for-byte preserved (19.086386ms)
+✔ single phone: five steps, final reveal, scoring, both Nervous directions, decline and fresh pool (1.946331ms)
+✔ remote text: drafts absent, only challenger submits, review, final step and clearing (0.338418ms)
+✔ remote custom truth uses text; photo/video custom dares require Snapchat marker (0.930807ms)
+✔ stage-only selection, no repeat on exhaustion, three matches and cleanup (1.673551ms)
+✔ reject malformed settings and unsupported actions (0.445769ms)
+✔ entire stage pools can be exhausted without repeats or an invalid custom-round counter (89.273601ms)
+✔ score thresholds select the next stage in all three rounds and both modes (1.722105ms)
+✔ fixed fifteen-point target cannot be overridden (1.128964ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 210.334013

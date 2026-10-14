@@ -103,3 +103,10 @@ Published verification: the hosted library was downloaded and its SHA-256 matche
 Imported the supplied challenge-library-PRODUCTION.json byte-for-byte, SHA256 d00e6785c2e425756eabaad179c5f608acb6e66582a5fe98337f21af8f487a97. No wording or coding corrections. Gameplay metadata unchanged. Structural validator passed: 1,000 variants, 500 concepts, 5,000 steps; required stage counts, unique IDs and five steps checked, no duplicate candidates detected.
 
 Existing automated checks: 8 of 9 passed. The remaining check expects the literal phrase “via Snapchat”; the edited prompt instead says “Take a Snapchat photo”. This is a wording assertion, not a JSON or gameplay compatibility error; the owner's wording was preserved. Full multiplayer tests from earlier releases remain historical and were not rerun for this text-only import.
+
+
+## Round progression and rename — 14 October 2026
+
+Renamed the review game Behind Closed Doors: Unfiltered and changed the visible Nervous wording to Too Far. Fixed target to 15; removed score selection. Round 1 uses Warm-Up until combined score 7, Getting Personal until either score 12, then Extreme. Round 2 starts Getting Personal and switches at either score 10. Round 3 is Extreme throughout. Selection changes after a challenge ends, preserving active steps. Championship still counts round wins; scores reset between rounds.
+
+Nine engine tests passed, including both modes, exact thresholds, a two-point threshold jump, active-card continuity, fixed-target enforcement, completion permissions, scoring, remote responses, no repeats and original-file preservation. App JavaScript syntax and referenced UI IDs checked. Latest owner-edited challenge file preserved; existing editorial wording assertion limitation remains as documented above.
