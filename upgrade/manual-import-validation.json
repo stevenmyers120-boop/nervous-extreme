@@ -12,5 +12,9 @@
   "notes": [
     "Owner-edited file imported byte-for-byte.",
     "Reload both devices and start a fresh room."
-  ]
+  ],
+  "hostedBytesMatchAttachment": true,
+  "verifiedAt": "2026-10-14T10:54:05.145210+00:00",
+  "libraryCommit": "4d571834895a0e8445d80a6392924d2ce1ec82ec",
+  "originalGameUnchanged": true
 }
