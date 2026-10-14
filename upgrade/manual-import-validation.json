@@ -1,6 +1,7 @@
 {
   "source": "challenge-library-PRODUCTION.json",
-  "sha256": "e795ae0f73ad44f11797f398fbb0a64c930fca31405733e3f3bae1b28707ce45",
+  "importedAt": "2026-10-14T10:52:27.539341+00:00",
+  "sha256": "d00e6785c2e425756eabaad179c5f608acb6e66582a5fe98337f21af8f487a97",
   "wordingChangedByImport": false,
   "codingCorrections": [],
   "variants": 1000,
@@ -8,10 +9,8 @@
   "steps": 5000,
   "gameplayMetadataUnchanged": true,
   "canonicalSource": "challenge-library.json",
-  "exactDuplicateExtraCards": 41,
   "notes": [
-    "Duplicate content is retained per owner wording-preservation instruction.",
-    "Previous release tests are historical; structural compatibility checked for this import.",
+    "Owner-edited file imported byte-for-byte.",
     "Reload both devices and start a fresh room."
   ]
 }

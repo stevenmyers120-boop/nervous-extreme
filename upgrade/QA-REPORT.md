@@ -96,3 +96,10 @@ Published verification: the hosted library was downloaded and its SHA-256 matche
 ## Further owner-edited import — 13 October 2026
 
 `challenge-library-PRODUCTION.json` replaces the earlier proofread import byte-for-byte. All 1,000 IDs, stages, modes, kinds, evidence types and five-step metadata match the previous library. No coding correction or wording edit was required. Forty-one exact extra repeated step sequences remain in the supplied file and are retained. Gameplay code and Firebase configuration are unchanged. The SHA-256 is recorded in `manual-import-validation.json`; earlier test results remain historical.
+
+
+## Owner-edited library import — 14 October 2026
+
+Imported the supplied challenge-library-PRODUCTION.json byte-for-byte, SHA256 d00e6785c2e425756eabaad179c5f608acb6e66582a5fe98337f21af8f487a97. No wording or coding corrections. Gameplay metadata unchanged. Structural validator passed: 1,000 variants, 500 concepts, 5,000 steps; required stage counts, unique IDs and five steps checked, no duplicate candidates detected.
+
+Existing automated checks: 8 of 9 passed. The remaining check expects the literal phrase “via Snapchat”; the edited prompt instead says “Take a Snapchat photo”. This is a wording assertion, not a JSON or gameplay compatibility error; the owner's wording was preserved. Full multiplayer tests from earlier releases remain historical and were not rerun for this text-only import.
